@@ -1,0 +1,112 @@
+.signinPage {
+    background: url('/images/background.png') no-repeat center center fixed;
+    background-size: cover; 
+    padding: 20px; 
+    height: 100vh;
+ 
+  
+}
+
+
+  .signinContainer {
+    max-width: 400px;
+    margin:  100px auto;
+    padding: 10px;  
+    border: none;
+    position: relative;
+  } 
+   
+  /* .signinForm div {
+    margin-bottom: 20px;
+  } */
+
+  .signinContainer h1 {
+    font-weight: bolder;
+    font-size: 80px;
+    text-align: center;
+    opacity: 0.8;
+    font-family: 'Inter', sans-serif;
+    text-decoration: underline;
+    padding: 40px;
+    gap: 30px;
+    text-underline-offset: 30px;
+    text-decoration-thickness: 2px;
+  
+  }
+
+  
+  
+  .signinForm label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: larger;
+    font-weight: bold; 
+  }
+  
+  .signinForm input {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 2px solid #FFFFFF;
+    outline: none;
+    background: transparent;
+  
+
+  }
+  
+  .signinForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(176, 175, 175);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.8;
+
+    font-weight: bold;
+    font-size: larger;
+    margin-top: 20px;
+  
+  }
+  
+  .signinForm button:hover {
+    background-color: #849AC8
+  }
+
+  .links {
+    color :#1972F8;
+    font-weight: bold;
+    text-align: right;
+  }
+
+  .paralink {
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+
+  
+
+.userIcon,
+.lockIcon {
+    margin-left: 340px; /* Space between input and icon */
+    margin-bottom: 30px;
+    margin-top: -50px;
+    transition: transform 0.3s ease, color 0.3s ease; /* create a smooth transition */
+
+    
+}
+
+
+/* Hover Effect for icons */
+.signinForm input:hover + .lockIcon, .signinForm input:hover + .userIcon {
+  color: #849AC8; /* Change color on hover */
+  transform: scale(1.2); 
+ 
+
+}
+ 
+
+ 

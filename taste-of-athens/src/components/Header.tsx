@@ -22,7 +22,7 @@ const Header = () => {
             <Link className={styles.navLink} href="/booktable">Book Table</Link>
           </li>
           <li>
-            <Link className={styles.navLink} href="/restaurants">Restaurants</Link>
+            <Link className={styles.navLink} href="/list">Restaurants</Link>
           </li>
           <li>
             <Link className={styles.navLink} href="/signin">Sign In</Link>

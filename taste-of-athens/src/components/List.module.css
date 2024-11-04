@@ -1,0 +1,61 @@
+/* components/List.module.css */
+
+.container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    justify-items: center;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .card h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .button {
+    background-color: #f5a6a6;
+    color: #fff;
+    border: none;
+    padding: 10px 16px; /* Ensure padding is adequate for text */
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    white-space: nowrap; /* Prevents text from wrapping */
+    display: inline-block; /* Ensures button adapts to content size */
+    overflow: visible; /* Ensure content is not clipped */
+    min-width: 110px; /* Adjust as necessary */
+  }
+  
+  .button:hover {
+    background-color: #e58c8c;
+  }
+  

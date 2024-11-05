@@ -4,9 +4,8 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '../components/Header';
 import styles from '../components/Page.module.css';
-//import { FaLocationDot } from "react-icons/f6";
+import { FaLocationDot } from "react-icons/f6";
 import List from '../components/List';
-//<FaLocationDot className={styles.locationIcon} size={30} />
 
 const HomePage = () => {
   const router = useRouter();
@@ -22,6 +21,7 @@ const HomePage = () => {
       <p className={styles.para}>Find the best restaurants in Athens, Georgia!</p>
 
       <div className={styles.findRestaurants}>
+        <FaLocationDot className={styles.locationIcon} size={30} />
         <span className={styles.label}>Find Restaurants</span>
       </div>
 

@@ -1,11 +1,12 @@
 .header {
+
   position: absolute; 
   top: 0; 
   right: 0; 
   color: white;
-  padding: 10px;
-  text-align: right; 
-  width: 100%; /* the header takes full width */
+  padding: 10px 20px; /* Add some padding for spacing */
+  width: 100%; /* Header takes full width */
+  
   
 
 }
@@ -20,6 +21,7 @@
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: larger;
+  margin-top: -150px;
 
   
 
@@ -43,4 +45,10 @@
   }
   .searchInput::placeholder {
     color:white;;
+  }
+ 
+  .logo {
+    width: 200px;
+    margin-top: -20px;
+  
   }

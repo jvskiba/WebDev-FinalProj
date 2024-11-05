@@ -14,6 +14,11 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <nav>
+         <div className = {styles.logoContainer}>
+          <img src ="/images/logo.png" alt = "logo" className = {styles.logo}/>
+        </div> 
+
+   
         <ul className={styles.navList}>
           <li>
             <Link className={styles.navLink} href="/">Home</Link>
@@ -36,8 +41,7 @@ const Header = () => {
           placeholder="Search" 
         />
       </div>
-          
-        </ul>
+       </ul>
         
       </nav>
     </header>

@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '../components/Header';
 import styles from '../components/Page.module.css';
-import { FaLocationDot } from "react-icons/f6";
+import { FaLocationDot } from "react-icons/fa6";
 import List from '../components/List';
 
 const HomePage = () => {

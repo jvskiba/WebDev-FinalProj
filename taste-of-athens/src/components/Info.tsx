@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from './Info.module.css';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface RestaurantInfoProps {
   restaurantName: string;
@@ -69,6 +70,16 @@ const restaurantData = {
 const Info: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
   const restaurant = restaurantData[restaurantName];
 
+  const router = useRouter();
+
+  const handleLeaveReview = (name: string) => {
+    router.push(`/leave-review?name=${encodeURIComponent(name)}`);
+  };
+
+  const handleViewReviews = (name: string) => {
+    router.push(`/reviews?name=${encodeURIComponent(name)}`);
+  };
+
   if (!restaurant) {
     return <p>Restaurant not found.</p>;
   }
@@ -102,7 +113,7 @@ const Info: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
       <div className={styles.buttons}>
         <button className={styles.button}>MENUS</button>
         <button className={styles.button}>Reservations</button>
-        <button className={styles.button}>Write Review</button>
+        <button className={styles.button} onClick={() => handleLeaveReview(restaurantName)}>Write Review</button>
         <button className={styles.button}>Reviews & Ratings</button>
       </div>
     </div>

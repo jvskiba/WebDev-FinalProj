@@ -5,6 +5,7 @@ import React from 'react';
 import styles from './List.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Header from '../components/Header';
 
 interface Restaurant {
   name: string;
@@ -29,6 +30,7 @@ const List: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <Header />
       <h1 className={styles.title}>Restaurants in Athens</h1>
       <div className={styles.grid}>
         {restaurantData.map((restaurant, index) => (

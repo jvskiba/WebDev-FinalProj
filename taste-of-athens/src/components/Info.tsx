@@ -1,3 +1,5 @@
+"use client";
+
 // components/Info.tsx
 import React from 'react';
 import styles from './Info.module.css';
@@ -67,7 +69,7 @@ const restaurantData = {
   // Add other restaurants as needed
 };
 
-const Info: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
+const Info: React.FC<RestaurantInfoProps> = ({ restaurantName}) => {
   const restaurant = restaurantData[restaurantName];
 
   const router = useRouter();

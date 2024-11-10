@@ -4,24 +4,35 @@
 import React from 'react';
 import styles from './Info.module.css';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useNavigate , useParams} from 'react-router-dom';
 
 interface RestaurantInfoProps {
-  restaurantName: string;
+  name: string;
+  address: string;
+  phone: string;
+  image: string;
+  hours: hoursProps[];
 }
 
-const restaurantData = {
-  'South Kitchen + Bar': {
+interface hoursProps {
+  label: string;
+  time: string;
+}
+
+const restaurantData: RestaurantInfoProps[] = [
+  {
+    name: 'South Kitchen + Bar',
     address: '247 E Washington St, Athens, GA 30601-4532',
     phone: '+1 706-395-6125',
     hours: [
-      { label: 'Happy Hour', description: '(1/2 priced select cocktails)', time: '3:00 pm - 6:00 pm Monday through Thursday' },
+      { label: 'Happy Hour (1/2 priced select cocktails)', time: '3:00 pm - 6:00 pm Monday through Thursday' },
       { label: 'Dinner', time: '4:00 pm - 10:00 pm Monday through Thursday and Sunday' },
       { label: 'Dinner', time: '4:00 pm - 11:00 pm Friday and Saturday' },
     ],
     image: '/images/south-kitchen.jpg',
   },
-  'The National': {
+  {
+    name: 'The National',
     address: '232 W Hancock Ave, Athens, GA 30601',
     phone: '+1 706-549-3450',
     hours: [
@@ -30,7 +41,8 @@ const restaurantData = {
     ],
     image: '/images/the-national.jpg',
   },
-  'Hilltop Grille': {
+  {
+    name: 'Hilltop Grille',
     address: '2310 W Broad St, Athens, GA 30606',
     phone: '+1 706-353-7667',
     hours: [
@@ -39,7 +51,8 @@ const restaurantData = {
     ],
     image: '/images/hilltop-grille.jpg',
   },
-  'Porterhouse Grill': {
+   {
+    name: 'Porterhouse Grill',
     address: '459 E Broad St, Athens, GA 30601',
     phone: '+1 706-369-0990',
     hours: [
@@ -48,7 +61,8 @@ const restaurantData = {
     ],
     image: '/images/porterhouse-grill.jpg',
   },
-  'Flama Brazilian Steak House': {
+  {
+    name: 'Flama Brazilian Steak House',
     address: '1550 Oglethorpe Ave, Athens, GA 30606',
     phone: '+1 706-850-8299',
     hours: [
@@ -57,7 +71,8 @@ const restaurantData = {
     ],
     image: '/images/flama-brazilian.jpg',
   },
-  'Clocked': {
+  {
+    name: 'Clocked',
     address: '259 W Washington St, Athens, GA 30601',
     phone: '+1 706-548-9175',
     hours: [
@@ -67,19 +82,24 @@ const restaurantData = {
     image: '/images/clocked.jpg',
   },
   // Add other restaurants as needed
-};
+];
 
-const Info: React.FC<RestaurantInfoProps> = ({ restaurantName}) => {
-  const restaurant = restaurantData[restaurantName];
+const getRestaurantInfo = (restaurantName: string) => {
+  return restaurantData[1];  //TEMPERARY HARD CODE FIX-LATER
+}
 
-  const router = useRouter();
+const Info = () => {
+  const { restName } = useParams();
+  const restaurant = getRestaurantInfo("temp");
+
+  const navigate = useNavigate();
 
   const handleLeaveReview = (name: string) => {
-    router.push(`/leave-review?name=${encodeURIComponent(name)}`);
+    navigate(`/leave-review?name=${encodeURIComponent(name)}`);
   };
 
   const handleViewReviews = (name: string) => {
-    router.push(`/reviews?name=${encodeURIComponent(name)}`);
+    navigate(`/reviews?name=${encodeURIComponent(name)}`);
   };
 
   if (!restaurant) {
@@ -105,7 +125,6 @@ const Info: React.FC<RestaurantInfoProps> = ({ restaurantName}) => {
           {restaurant.hours.map((hour, index) => (
             <div key={index}>
               <p className={styles.hourLabel}>{hour.label}</p>
-              {hour.description && <p className={styles.hourDescription}>{hour.description}</p>}
               <p>{hour.time}</p>
             </div>
           ))}

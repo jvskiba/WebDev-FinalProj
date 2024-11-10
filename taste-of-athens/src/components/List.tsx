@@ -4,7 +4,7 @@
 import React from 'react';
 import styles from './List.module.css';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useNavigate} from 'react-router-dom';
 import Header from '../components/Header';
 
 interface Restaurant {
@@ -22,10 +22,10 @@ const restaurantData: Restaurant[] = [
 ];
 
 const List: React.FC = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleLearnMore = (name: string) => {
-    router.push(`/info?name=${encodeURIComponent(name)}`);
+    navigate(`/info?name=${encodeURIComponent(name)}`);
   };
 
   return (
@@ -35,7 +35,13 @@ const List: React.FC = () => {
       <div className={styles.grid}>
         {restaurantData.map((restaurant, index) => (
           <div key={index} className={styles.card}>
-            <Image src={restaurant.image} alt={restaurant.name} className={styles.image} width={200} height={150} />
+            <Image
+              src={restaurant.image}
+              alt={restaurant.name}
+              className={styles.image}
+              width={200}
+              height={150}
+            />
             <h2>{restaurant.name}</h2>
             <button
               className={styles.button}

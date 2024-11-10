@@ -1,16 +1,16 @@
 "use client"; 
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigate} from 'react-router-dom';
 import Header from '../components/Header';
 import styles from '../components/Homepage.module.css';
 import { FaLocationDot } from "react-icons/fa6";
 
 const HomePage = () => {
-  const router = useRouter();
+  const navigate = useNavigate();
   
   const handleSearchClick = () => {
-    router.push('/list');
+    navigate('/list');
   };
 
   return (

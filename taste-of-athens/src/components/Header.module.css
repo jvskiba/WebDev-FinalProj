@@ -3,11 +3,9 @@
   position: absolute; 
   top: 0; 
   right: 0; 
-  color: white;
   padding: 10px 20px; /* Add some padding for spacing */
   width: 100%; /* Header takes full width */
-  
-  
+  color: var(--foreground);
 
 }
 
@@ -27,7 +25,7 @@
 
 }
   .navLink {
-    color: white;
+    color: var(--foreground);
     text-decoration: none;
 
   }
@@ -44,7 +42,7 @@
   
   }
   .searchInput::placeholder {
-    color:white;;
+    color: var(--foreground);
   }
  
   .logo {

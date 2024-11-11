@@ -1,5 +1,6 @@
 body {
-    color: #171717;
+    color: #171717; 
+    --foreground: #171717;
     background: #FFFFFF;
     margin: 10 10;
 }

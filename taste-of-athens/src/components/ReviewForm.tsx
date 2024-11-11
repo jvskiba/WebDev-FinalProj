@@ -7,6 +7,7 @@ import Header from './Header';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import LogoutBanner from './LogoutBanner';
 
 interface ReviewFormProps {
     restaurantName: string;
@@ -165,7 +166,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ( {restaurantName}: ReviewFormProp
 
     return (
         <div className={styles.pageContainer}>
-            <Header />
+            {isLoggedIn ? <LogoutBanner /> : <Header />}
 
             <h1 className={styles.name}>{restaurantName}</h1>
 

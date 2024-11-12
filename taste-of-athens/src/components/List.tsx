@@ -21,11 +21,12 @@ const restaurantData: Restaurant[] = [
   { name: 'Clocked', image: '/images/clocked.jpg' },
 ];
 
-const List: React.FC = () => {
+const List = () => {
   const navigate = useNavigate();
 
   const handleLearnMore = (name: string) => {
-    navigate(`/info?name=${encodeURIComponent(name)}`);
+    console.log(`/resturants:{name}`);
+    navigate(`/resturants:{name}`);
   };
 
   return (

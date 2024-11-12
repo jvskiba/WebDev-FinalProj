@@ -9,6 +9,7 @@ import Register from '../components/Register';
 import Reviews from '../components/Reviews';
 import Signin from '../components/Signin';
 import Info from '../components/Info'
+import ReviewForm from '../components/ReviewForm'
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/resturants:restName" element={<Info />} />
-            <Route path="/signin" element={<Signin />} />
+            <Route path="/reviewForm" element={<ReviewForm />} />
 
           </Routes>
         </div>

@@ -1,36 +1,32 @@
-"use client"; 
+"use client";
 
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import Header from '../components/Header';
-import styles from '../components/Page.module.css';
-import { FaLocationDot } from "react-icons/fa6";
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
+import HomePage from '../components/Homepage';
 import List from '../components/List';
+import Register from '../components/Register';
+import Reviews from '../components/Reviews';
+import Signin from '../components/Signin';
 
-const HomePage = () => {
-  const router = useRouter();
-  
-  const handleSearchClick = () => {
-    router.push('/list');
-  };
-
+function App() {
   return (
-    <div className={styles.homepage}>
-      <Header />
-      <h1 className={styles.title}>Restaurants & Ratings in Athens</h1>
-      <p className={styles.para}>Find the best restaurants in Athens, Georgia!</p>
+    <Router>
+      <div>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/list" element={<List />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/signin" element={<Signin />} />
 
-      <div className={styles.findRestaurants}>
-        <FaLocationDot className={styles.locationIcon} size={30} />
-        <span className={styles.label}>Find Restaurants</span>
+          </Routes>
+        </div>
       </div>
-
-      <div className={styles.buttonContainer}>
-        <button className={styles.button} onClick={handleSearchClick}>Search</button>
-        <button className={styles.button}>Book Now</button>
-      </div>
-    </div>
+    </Router>
   );
-};
+}
 
-export default HomePage;
+export default App;

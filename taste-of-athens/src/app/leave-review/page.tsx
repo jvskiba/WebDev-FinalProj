@@ -2,7 +2,6 @@
 
 
 import React from 'react';
-import Header from '@/components/Header';
 import ReviewForm from '@/components/ReviewForm';
 import { useSearchParams } from 'next/navigation';
 

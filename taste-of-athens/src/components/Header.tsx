@@ -37,21 +37,35 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <nav>
-        <div className={styles.navList}>
-        <button className={styles.button} onClick={() => handleLinkPress('/')}>Home</button>
-        <button className={styles.button} onClick={() => handleLinkPress('/list')}>Restaurants</button>
-        <button className={styles.button} onClick={() => handleLinkPress('/signin')}>Sign In</button>
-        <div className={styles.searchContainer}>
-          <input 
-            type="text" 
-            className={styles.searchInput} 
-            value={searchTerm} 
-            onChange={handleSearchChange} 
-            color={tColor}
-            placeholder="Search" 
-          />
-        </div>
-        </div>    
+         <div className = {styles.logoContainer}>
+          <img src ="/images/logo.png" alt = "logo" className = {styles.logo}/>
+        </div> 
+
+   
+        <ul className={styles.navList}>
+          <li>
+            <Link className={styles.navLink} href="/">Home</Link>
+          </li>
+          <li>
+            <Link className={styles.navLink} href="/booktable">Book Table</Link>
+          </li>
+          <li>
+            <Link className={styles.navLink} href="/list">Restaurants</Link>
+          </li>
+          <li>
+            <Link className={styles.navLink} href="/signin">Sign In</Link>
+          </li>
+          <div className={styles.searchContainer}>
+        <input 
+          type="text" 
+          className={styles.searchInput} 
+          value={searchTerm} 
+          onChange={handleSearchChange} 
+          placeholder="Search" 
+        />
+      </div>
+       </ul>
+        
       </nav>
     </header>
   );

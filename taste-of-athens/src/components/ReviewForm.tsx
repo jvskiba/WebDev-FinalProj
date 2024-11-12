@@ -6,6 +6,8 @@ import { ChangeEvent } from 'react';
 import Header from './Header';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
+import LogoutBanner from './LogoutBanner';
 
 interface ReviewFormProps {
     restaurantName: string;
@@ -119,7 +121,7 @@ const restaurantData = {
     // Add other restaurants as needed
   };
 
-
+const isLoggedIn = false;
 
 const ReviewForm: React.FC<ReviewFormProps> = ( {restaurantName}: ReviewFormProps ) => {
     const restaurant = restaurantData[restaurantName];
@@ -164,7 +166,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ( {restaurantName}: ReviewFormProp
 
     return (
         <div className={styles.pageContainer}>
-            <Header />
+            {isLoggedIn ? <LogoutBanner /> : <Header />}
 
             <h1 className={styles.name}>{restaurantName}</h1>
 
@@ -237,7 +239,8 @@ const ReviewForm: React.FC<ReviewFormProps> = ( {restaurantName}: ReviewFormProp
                     </div>
 
                     {/* Submit Button*/}
-                    <button onClick={handleSubmit} className={styles.submitButton}>Submit</button>
+                    {isLoggedIn ? <button onClick={handleSubmit} className={styles.submitButton}>Submit</button> 
+                        : <Link href='/signin' className={styles.signinPrompt}>Sign in</Link>}
 
 
 

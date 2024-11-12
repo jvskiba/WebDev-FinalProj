@@ -7,7 +7,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 interface RestaurantInfoProps {
-  restaurantName: string;
+  restaurantName: keyof typeof restaurantData;
+}
+
+interface Hour {
+  label: string;
+  description?: string;
+  time: string;
 }
 
 const restaurantData = {
@@ -95,14 +101,14 @@ const Info: React.FC<RestaurantInfoProps> = ({ restaurantName}) => {
       <div className={styles.details}>
         <Image
           src={restaurant.image}
-          alt={restaurant.name || "Restaurant image"}
+          alt={`${restaurantName} image`}
           className={styles.image}
           width={200}
           height={150}
         />
 
         <div className={styles.hours}>
-          {restaurant.hours.map((hour, index) => (
+          {restaurant.hours.map((hour: Hour, index: number) => (
             <div key={index}>
               <p className={styles.hourLabel}>{hour.label}</p>
               {hour.description && <p className={styles.hourDescription}>{hour.description}</p>}

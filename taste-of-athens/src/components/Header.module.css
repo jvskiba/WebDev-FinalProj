@@ -1,11 +1,12 @@
 .header {
+
   position: absolute; 
   top: 0; 
   right: 0; 
-  color: white;
-  padding: 10px;
-  text-align: right; 
-  width: 100%; /* the header takes full width */
+  padding: 10px 20px; /* Add some padding for spacing */
+  width: 100%; /* Header takes full width */
+  color: var(--foreground);
+
 }
 
 .navList {
@@ -27,13 +28,33 @@
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: larger;
-}
-  
-.searchInput {
-  background-color: rgba(220, 213, 213, 0.5);
-  opacity: 0.8;
-}
+  margin-top: -150px;
 
-.searchInput::placeholder {
-  color:white;;
+  
+
 }
+  .navLink {
+    color: var(--foreground);
+    text-decoration: none;
+
+  }
+  
+  .navLink:hover {
+    text-decoration: underline;
+  }
+
+  
+  .searchInput {
+    background-color: rgba(220, 213, 213, 0.5);
+   
+    opacity: 0.8;
+  
+  }
+  .searchInput::placeholder {
+    color: var(--foreground);
+  }
+ 
+  .logo {
+    width: 200px;
+    margin-top: -20px;
+  }

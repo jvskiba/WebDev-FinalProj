@@ -1,5 +1,6 @@
 body {
-    color: #171717;
+    color: #171717; 
+    --foreground: #171717;
     background: #FFFFFF;
     margin: 10 10;
 }
@@ -114,4 +115,15 @@ body {
     border-radius: 20px;
     resize: none;
     padding: 5px;
+}
+
+.signinPrompt {
+    background-color: #C77F80;
+    color: #FFFFFF;
+    border-radius: 5px;
+    width: 50%;
+    align-self: center;
+    grid-column: 2;
+    grid-row: 2;
+    text-align: center;
 }

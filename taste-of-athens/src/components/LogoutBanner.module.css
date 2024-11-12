@@ -1,0 +1,17 @@
+.banner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logoutButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #C77F80;
+}
+
+.logo {
+    width: 200px;
+    margin-top: -40px;
+}

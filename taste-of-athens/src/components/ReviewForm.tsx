@@ -10,12 +10,12 @@ import Link from 'next/link';
 import LogoutBanner from './LogoutBanner';
 
 interface ReviewFormProps {
-    restaurantName: string;
+    restaurantName: keyof typeof restaurantData;
 }
 
 interface Review {
     id: number;
-    rating: number;
+    rating: string;
     review: string;
 }
 

@@ -1,5 +1,6 @@
 "use client"; 
 
+import Image from 'next/image';
 import React, { useState } from 'react'; 
 import styles from './Header.module.css'; 
 import { useNavigate, useLocation, Link } from 'react-router-dom';
@@ -37,6 +38,8 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
+        <Image src="/images/logo.png" alt='Taste of Athens' width={150} height={500}
+                className={styles.logo}/>
         <div className={styles.navList}>
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/')}>Home</button>
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/list')}>Restaurants</button>

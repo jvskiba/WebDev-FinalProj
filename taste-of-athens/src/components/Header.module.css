@@ -6,6 +6,10 @@
   padding: 10px;
   text-align: right; 
   width: 100%; /* the header takes full width */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .navList {
@@ -43,4 +47,13 @@
 
 .searchInput::placeholder {
   color:white;;
+}
+
+.logo {
+  justify-self: center;
+  align-self: center;
+}
+
+.searchContainer {
+  align-self: center;
 }

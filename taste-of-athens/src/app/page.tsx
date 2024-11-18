@@ -16,6 +16,7 @@ function App() {
   return (
     <Router>
       <div>
+        <title> Taste of Athens </title>
         <div className="content">
           <Routes>
             <Route path="/" element={<HomePage />} />

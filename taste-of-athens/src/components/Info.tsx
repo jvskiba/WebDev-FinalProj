@@ -91,6 +91,10 @@ const Info = () => {
     navigate('/details', { state: { restaurantName: name } });
   };
 
+  const handleBtnClick = () => {
+    navigate('/comingSoon');
+  };
+
   if (!restaurant) {
     return <p>Restaurant not found.</p>;
   }
@@ -123,8 +127,8 @@ const Info = () => {
       </div>
 
       <div className={styles.buttons}>
-        <button className={styles.button}>MENUS</button>
-        <button className={styles.button}>Reservations</button>
+        <button className={styles.button} onClick={handleBtnClick}>MENUS</button>
+        <button className={styles.button} onClick={handleBtnClick}>Reservations</button>
         <button className={styles.button} onClick={() => handleLeaveReview(restaurantName)}>Write Review</button>
         <button className={styles.button}>Reviews & Ratings</button>
       </div>

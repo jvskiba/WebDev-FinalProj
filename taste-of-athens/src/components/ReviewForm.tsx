@@ -6,7 +6,7 @@ import { ChangeEvent } from 'react';
 import Header from './Header';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import LogoutBanner from './LogoutBanner';
 
 interface ReviewFormProps {
@@ -244,7 +244,7 @@ const ReviewForm = () => {
 
                     {/* Submit Button*/}
                     {isLoggedIn ? <button onClick={handleSubmit} className={styles.submitButton}>Submit</button> 
-                        : <Link href='/signin' className={styles.signinPrompt}>Sign in</Link>}
+                        : <Link to='/signin' className={styles.signinPrompt}>Sign in</Link>}
 
 
 

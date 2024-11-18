@@ -9,12 +9,8 @@ import { FaLocationDot } from "react-icons/fa6";
 const HomePage = () => {
   const navigate = useNavigate();
   
-  const handleSearchClick = () => {
-    navigate('/');
-  };
-
-  const handleRestClick = () => {
-    navigate('/List');
+  const handleBtnClick = () => {
+    navigate('/comingSoon');
   };
 
   return (
@@ -29,8 +25,8 @@ const HomePage = () => {
       </div>
 
       <div className={styles.buttonContainer}>
-        <button className={styles.button} onClick={handleSearchClick}>Search</button>
-        <button className={styles.button}>Book Now</button>
+        <button className={styles.button} onClick={handleBtnClick}>Search</button>
+        <button className={styles.button} onClick={handleBtnClick}>Book Now</button>
       </div>
     </div>
   );

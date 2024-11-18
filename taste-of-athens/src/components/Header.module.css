@@ -1,51 +1,39 @@
 .header {
-
   position: absolute; 
   top: 0; 
   right: 0; 
-  padding: 10px 20px; /* Add some padding for spacing */
-  width: 100%; /* Header takes full width */
-  color: var(--foreground);
-
+  color: white;
+  padding: 10px;
+  text-align: right; 
+  width: 100%; /* the header takes full width */
 }
 
 .navList {
-  list-style: none;
   display: flex;
-  gap: 50px;
+  gap: 5px;
   justify-content: flex-end; 
   margin: 0;
   padding: 40px;
+  
+}
+
+.button {
+  padding: 10px;
+  background-color: rgb(176, 175, 175, 0);
+  border-radius: 1px;
+  text-align: center;
+  font-weight: bolder;
+  color: white;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: larger;
-  margin-top: -150px;
-
-  
-
 }
-  .navLink {
-    color: var(--foreground);
-    text-decoration: none;
+  
+.searchInput {
+  background-color: rgba(220, 213, 213, 0.5);
+  opacity: 0.8;
+}
 
-  }
-  
-  .navLink:hover {
-    text-decoration: underline;
-  }
-
-  
-  .searchInput {
-    background-color: rgba(220, 213, 213, 0.5);
-   
-    opacity: 0.8;
-  
-  }
-  .searchInput::placeholder {
-    color: var(--foreground);
-  }
- 
-  .logo {
-    width: 200px;
-    margin-top: -20px;
-  }
+.searchInput::placeholder {
+  color:white;;
+}

@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './Info.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface RestaurantInfoProps {
   restaurantName: keyof typeof restaurantData;
@@ -73,17 +74,19 @@ const restaurantData = {
   // Add other restaurants as needed
 };
 
-const Info: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
+const Info = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { restaurantName } = location.state || {};
+
   const restaurant = restaurantData[restaurantName];
 
-  const router = useRouter();
-
   const handleLeaveReview = (name: string) => {
-    router.push(`/leave-review?name=${encodeURIComponent(name)}`);
+    navigate('/writeReview', { state: { restaurantName: name } });
   };
 
   const handleViewReviews = (name: string) => {
-    router.push(`/reviews?name=${encodeURIComponent(name)}`);
+    navigate('/details', { state: { restaurantName: name } });
   };
 
   if (!restaurant) {

@@ -4,7 +4,7 @@ import CircleIcon from './CircleIcon';
 import { useState } from 'react';
 import { ChangeEvent } from 'react';
 import Header from './Header';
-import { useRouter } from 'next/navigation';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Image from 'next/image';
 import Link from 'next/link';
 import LogoutBanner from './LogoutBanner';
@@ -123,7 +123,11 @@ const restaurantData = {
 
 const isLoggedIn = false;
 
-const ReviewForm: React.FC<ReviewFormProps> = ( {restaurantName}: ReviewFormProps ) => {
+const ReviewForm = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { restaurantName } = location.state || {};
+
     const restaurant = restaurantData[restaurantName];
     const [reviews, setReviews] = useState(restaurant.reviews)
 

@@ -1,3 +1,5 @@
+"use client";
+
 // components/Info.tsx
 import React from 'react';
 import styles from './Info.module.css';

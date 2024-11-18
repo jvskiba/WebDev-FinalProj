@@ -15,20 +15,21 @@ const Header = () => {
 
   // Function to determine text color based on the current route
   const getTextColor = (path: string) => {
-    console.log(path);
     switch (path) {
       case '/':
-        return 'green'; // Home page color
-      case '/about':
-        return 'blue'; // About page color
-      case '/contact':
-        return 'red'; // Contact page color
+        return styles.light;
+      case '/signin':
+        return styles.light;
+      case '/register':
+        return styles.light;
+      case '/resturants':
+        return styles.dark;
       default:
-        return 'black';
+        return styles.dark;
     }
   };
 
-  const tColor = getTextColor(location.pathname);
+  const btnClass = getTextColor(location.pathname);
   const navigate = useNavigate();
   const handleLinkPress = (path: string) => {
     navigate(path);
@@ -36,23 +37,20 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <nav>
         <div className={styles.navList}>
-        <button className={styles.button} onClick={() => handleLinkPress('/')}>Home</button>
-        <button className={styles.button} onClick={() => handleLinkPress('/list')}>Restaurants</button>
-        <button className={styles.button} onClick={() => handleLinkPress('/signin')}>Sign In</button>
-        <div className={styles.searchContainer}>
-          <input 
-            type="text" 
-            className={styles.searchInput} 
-            value={searchTerm} 
-            onChange={handleSearchChange} 
-            color={tColor}
-            placeholder="Search" 
-          />
-        </div>
+          <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/')}>Home</button>
+          <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/list')}>Restaurants</button>
+          <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signin')}>Sign In</button>
+          <div className={styles.searchContainer}>
+            <input 
+              type="text" 
+              className={`${styles.searchInput} ${btnClass}`}
+              value={searchTerm} 
+              onChange={handleSearchChange} 
+              placeholder="Search" 
+            />
+          </div>
         </div>    
-      </nav>
     </header>
   );
 };

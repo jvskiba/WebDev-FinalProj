@@ -4,8 +4,8 @@
 import React from 'react';
 import styles from './Info.module.css';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 interface RestaurantInfoProps {
   restaurantName: keyof typeof restaurantData;
@@ -97,6 +97,7 @@ const Info = () => {
 
   return (
     <div className={styles.container}>
+      <Header />
       <h1 className={styles.name}>{restaurantName}</h1>
       <p className={styles.address}>{restaurant.address}</p>
       <a href={`tel:${restaurant.phone}`} className={styles.phone}>{restaurant.phone}</a>

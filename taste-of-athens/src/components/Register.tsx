@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import styles from './Signin.module.css'; 
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
+import Header from '../components/Header';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -13,6 +15,7 @@ const Register = () => {
 
   return (
    <div className = {styles.signinPage}>
+    <Header />
      <div className={styles.signinContainer}>
       <h1 >Register</h1>
       <form className={styles.signinForm}>
@@ -47,7 +50,7 @@ const Register = () => {
             <FaLock className = {styles.lockIcon} size = {30} />
         </div>  
         <button type="submit">Register</button>
-        <p className = {styles.paralink}>Already have an account? <a href="/signin" className={styles.links}>Sign In Now!</a></p>
+        <p className = {styles.paralink}>Already have an account? <Link to="/signin" className={styles.links}>Sign In Now!</Link></p>
       </form>
       <div>
       

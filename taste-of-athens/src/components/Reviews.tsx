@@ -2,6 +2,7 @@
 import styles from './Reviews.module.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface ReviewsProps {}
 
@@ -17,24 +18,24 @@ interface Review {
 const Reviews: React.FC<ReviewsProps> = () => {
     const [reviews, setReviews] = useState<Review[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { restaurantName } = location.state || {};
     
     useEffect( () => {
         const fetchReviews = async () => {
             try {
-                const response = await fetch('/api/reviews');
+                const response = await fetch('/api/reviews/');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
 
                 const data = await response.json();
 
-                console.log('data.reviews:')
-                console.log(data.reviews)
-                console.log('type of data.reviews:')
-                console.log(typeof(data.reviews));
-
-                setReviews(data.reviews);
-
+                setReviews(data.reviews.filter(
+                    (review: Review)  => review.restaurant === restaurantName
+                ));
             } catch (error) {
                 console.log('Error from Reviews:', error);
             }

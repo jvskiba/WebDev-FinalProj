@@ -9,10 +9,6 @@ import Image from 'next/image';
 import { Link } from 'react-router-dom';
 import LogoutBanner from './LogoutBanner';
 
-interface ReviewFormProps {
-    restaurantName: keyof typeof restaurantData;
-}
-
 interface Review {
     id: number;
     rating: string;
@@ -87,13 +83,12 @@ const restaurantData = {
 
 const isLoggedIn = true;
 
-const ReviewForm: React.FC<ReviewFormProps> = () => {
+const ReviewForm = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { restaurantName } = location.state || {};
 
     const restaurant = restaurantData[restaurantName];
-    const [reviews, setReviews] = useState(restaurant.reviews)
 
     const [rating, setRating] = useState('0');
     const [review, setReview] = useState('');
@@ -137,7 +132,7 @@ const ReviewForm: React.FC<ReviewFormProps> = () => {
                 setSelectedRadio(''); // reset selected radio
                 setReview(''); // reset textbox
 
-                navigate('/reviews');
+                navigate('/reviews', { state: { restaurantName: restaurantName } });
             } catch (error) {
                 console.error('Error in ReviewForm!', error);
             }

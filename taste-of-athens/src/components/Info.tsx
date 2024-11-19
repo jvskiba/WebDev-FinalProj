@@ -88,7 +88,7 @@ const Info = () => {
   };
 
   const handleViewReviews = (name: string) => {
-    navigate('/details', { state: { restaurantName: name } });
+    navigate('/reviews', { state: { restaurantName: name } });
   };
 
   const handleBtnClick = () => {
@@ -130,7 +130,7 @@ const Info = () => {
         <button className={styles.button} onClick={handleBtnClick}>MENUS</button>
         <button className={styles.button} onClick={handleBtnClick}>Reservations</button>
         <button className={styles.button} onClick={() => handleLeaveReview(restaurantName)}>Write Review</button>
-        <button className={styles.button}>Reviews & Ratings</button>
+        <button className={styles.button} onClick={() => handleViewReviews(restaurantName)}>Reviews & Ratings</button>
       </div>
     </div>
   );

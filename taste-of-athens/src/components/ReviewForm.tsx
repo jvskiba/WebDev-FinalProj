@@ -26,36 +26,6 @@ interface Restaurant {
     reviews: Review[];
 }
 
-const southReviews = [{id: 19, rating: 5, review: 'I love the kitchen!'}, 
-    {id: 20, rating: 5, review: 'Wowzers!'}, 
-    {id: 21, rating: 3, review: 'Sample text'}];
-const nationalReviews = [{id: 22, rating: 2, review: 'ehhhh'}, 
-    {id: 23, rating: 2, review: 'Not my cup of tea'}, 
-    {id: 24, rating: 4, review: 'My favorite place'}];
-const hilltopReviews = [{id: 25, rating: 4, review: 'great food'}, 
-    {id: 26, rating: 2, review: 'bad service'}, 
-    {id: 27, rating: 4, review: 'i like the burger'}];
-const porterhouseReviews = [{id: 28, rating: 1, review: 'does not even have steak'}, 
-    {id: 29, rating: 1, review: 'unclean'}, 
-    {id: 30, rating: 2, review: 'definitely a skip'}];
-const flamaReviews = [{id: 31, rating: 5, review: 'loved it!'}, 
-    {id: 32, rating: 4, review: 'great for birthdays'}, 
-    {id: 33, rating: 2, review: '2 stars.'}];
-const clockedReviews = [{id: 34, rating: 5, review: 'nice themed burgers'}, 
-    {id: 35, rating: 4, review: 'awesome fries'}, 
-    {id: 36, rating: 3, review: 'overpriced'}];
-
-/*
-const restaurantData = {
-    'South Kitchen + Bar': { id: 0, name: 'South Kitchen + Bar', image: '/images/south-kitchen.jpg', reviews: southReviews },
-    'The National': { id: 1, name: 'The National', image: '/images/the-national.jpg', reviews: nationalReviews},
-    'Hilltop Grille': { id: 2, name: 'Hilltop Grille', image: '/images/hilltop-grille.jpg', reviews: hilltopReviews },
-    'Porterhouse Grill': { id: 3, name: 'Porterhouse Grill', image: '/images/porterhouse-grill.jpg', reviews: porterhouseReviews },
-    'Flama Brazilian Steak House': { id: 4, name: 'Flama Brazilian Steak House', image: '/images/flama-brazilian.jpg', reviews: flamaReviews },
-    'Clocked': { id: 5, name: 'Clocked', image: '/images/clocked.jpg', reviews: clockedReviews },
-}; 
-*/
-
 const restaurantData = {
     'South Kitchen + Bar': {
       address: '247 E Washington St, Athens, GA 30601-4532',
@@ -66,7 +36,6 @@ const restaurantData = {
         { label: 'Dinner', time: '4:00 pm - 11:00 pm Friday and Saturday' },
       ],
       image: '/images/south-kitchen.jpg',
-      reviews: southReviews,
     },
     'The National': {
       address: '232 W Hancock Ave, Athens, GA 30601',
@@ -76,7 +45,6 @@ const restaurantData = {
         { label: 'Dinner', time: '5:30 pm - 10:00 pm daily' },
       ],
       image: '/images/the-national.jpg',
-      reviews: nationalReviews,
     },
     'Hilltop Grille': {
       address: '2310 W Broad St, Athens, GA 30606',
@@ -86,7 +54,6 @@ const restaurantData = {
         { label: 'Dinner', time: '5:00 pm - 10:00 pm daily' },
       ],
       image: '/images/hilltop-grille.jpg',
-      reviews: hilltopReviews,
     },
     'Porterhouse Grill': {
       address: '459 E Broad St, Athens, GA 30601',
@@ -96,7 +63,6 @@ const restaurantData = {
         { label: 'Dinner', time: '5:00 pm - 10:00 pm daily' },
       ],
       image: '/images/porterhouse-grill.jpg',
-      reviews: porterhouseReviews,
     },
     'Flama Brazilian Steak House': {
       address: '1550 Oglethorpe Ave, Athens, GA 30606',
@@ -106,7 +72,6 @@ const restaurantData = {
         { label: 'Dinner', time: '5:00 pm - 10:00 pm daily' },
       ],
       image: '/images/flama-brazilian.jpg',
-      reviews: flamaReviews,
     },
     'Clocked': {
       address: '259 W Washington St, Athens, GA 30601',
@@ -116,14 +81,13 @@ const restaurantData = {
         { label: 'Dinner', time: '5:00 pm - 10:00 pm daily' },
       ],
       image: '/images/clocked.jpg',
-      reviews: clockedReviews,
     },
     // Add other restaurants as needed
   };
 
-const isLoggedIn = false;
+const isLoggedIn = true;
 
-const ReviewForm = () => {
+const ReviewForm: React.FC<ReviewFormProps> = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { restaurantName } = location.state || {};
@@ -144,29 +108,44 @@ const ReviewForm = () => {
         setSelectedRadio(n);
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         // only submit if user has entered rating and review
         if (rating !== '0' && review !== '') {
             // create new review object to add to reviews array
-            const newReview = {id: reviews.length * 100 + 1,
+            const newReview = {
+                restaurant: restaurantName,
                 rating: rating,
                 review: review,
+            };
+
+            try {
+                const response = await fetch('/api/leave-review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newReview),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                setRating('0'); // reset rating value
+                setSelectedRadio(''); // reset selected radio
+                setReview(''); // reset textbox
+
+                navigate('/reviews');
+            } catch (error) {
+                console.error('Error in ReviewForm!', error);
             }
-
-            setRating('0'); // reset rating value
-            setSelectedRadio(''); // reset selected radio
-            setReview(''); // reset textbox
-
-            // add review and rating to restaurant.reviews[]
-            setReviews( (prevReviews: Review[]) => [...prevReviews, newReview])
         }
         else {
             alert('Please enter a rating and a review')
         }
-    }
-    
+    };
 
     return (
         <div className={styles.pageContainer}>
@@ -245,20 +224,8 @@ const ReviewForm = () => {
                     {/* Submit Button*/}
                     {isLoggedIn ? <button onClick={handleSubmit} className={styles.submitButton}>Submit</button> 
                         : <Link to='/signin' className={styles.signinPrompt}>Sign in</Link>}
-
-
-
                 </form>
             </div>
-
-            {/* Temp Display of Ratings */}
-            <ul className={styles.ratingsDisplay}>
-                {reviews.map( 
-                    review => <li key={review.id}>
-                        <p>Rating: {review.rating} &nbsp; Review: {review.review}</p>
-                    </li>
-                )}
-            </ul>
         </div>
     );
 }

@@ -1,0 +1,136 @@
+body {
+    color: #171717; 
+    --foreground: #171717;
+    background: #FFFFFF;
+    margin: 10 10;
+}
+
+.pageContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.4fr 0.4fr 1fr 0.6fr;
+    align-items: center;
+    padding: 10px;
+}
+
+.name {
+    grid-row: 2;
+    font-size: 2em;
+    font-weight: bold;
+    justify-self: center;
+}
+
+.reviewComponents {
+    display: grid;
+    grid-template-columns: 33% 67%;
+    grid-row: 3;
+}
+
+.image {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.ratingsDisplay {
+    grid-row: 4;
+    justify-self: center;
+    border: 1px #171717 solid;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.formContainer {
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+    row-gap: 2em;
+    grid-row: 3;
+    grid-column: 2;
+}
+
+.ratingContainer {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    margin: 0 auto;
+    padding: 0px 20px 15px 20px;
+
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.reviewContainer {
+    display: inline-flex;
+    flex-direction: column;
+    grid-column: 3;
+    grid-row: 1;
+    align-items: center;
+}
+
+.submitButton {
+    background-color: #C77F80;
+    color: #FFFFFF;
+    border-radius: 5px;
+    width: 50%;
+    align-self: center;
+}
+
+.ratingButtonsForm {
+    display: inline-grid;
+    grid-template-columns: 45% 55%;
+    column-gap: 1rem;
+    align-items: center;
+}
+
+.radio {
+    opacity: 0;
+}
+
+.radioLabel {
+    align-self: flex-end;
+}
+
+.radioIcon {
+    display: inline-flex;
+    flex-direction: row;
+
+    border: 1px #b3b3b3 solid;
+    border-radius: 20px;
+    padding: 2.5px;
+}
+
+.radioIcon:hover {
+    border-color: #171717;
+}
+
+.radioContainer input[type='radio']:checked+div {
+    border-color: #171717;
+}
+
+.textbox {
+    background-color: #c3c3c3;
+    border: 1px #939393 solid;
+    border-radius: 20px;
+    resize: none;
+    padding: 5px;
+}
+
+.signinPrompt {
+    background-color: #C77F80;
+    color: #FFFFFF;
+    border-radius: 5px;
+    width: 50%;
+    align-self: center;
+    grid-column: 2;
+    grid-row: 2;
+    text-align: center;
+}
+
+.formButtons {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    grid-column: 2;
+    grid-row: 2;
+}

@@ -44,7 +44,10 @@ const Reviews: React.FC<ReviewsProps> = () => {
         setIsLoaded(true);
     }, []);
 
-   
+    const handleDelete = () => {
+        navigate('/');
+    }
+
     return (
         <div>
             <h1 className={styles.header}>Reviews & Ratings</h1>
@@ -56,6 +59,7 @@ const Reviews: React.FC<ReviewsProps> = () => {
                     review => <li key={review._id} className={styles.review}>
                         <p>Rating: {review.rating}</p>
                         <p>Review: {review.review}</p>
+                        <button onClick={() => {navigate(`/modify-item/${review._id}`, { state: { restaurantName: restaurantName } })}}>Modify Review</button>
                         </li>
                 )}
             </ul> : <></>}

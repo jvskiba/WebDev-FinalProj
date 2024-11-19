@@ -10,6 +10,7 @@ import Register from '../components/Register';
 import Reviews from '../components/Reviews';
 import Signin from '../components/Signin';
 import ReviewForm from '../components/ReviewForm';
+import ModifyItem from '../components/ModifyItem';
 import ComingSoon from '../components/404page';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/signin" element={<Signin />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/writeReview" element={<ReviewForm />} />
+            <Route path="/modify-item/:id" element={<ModifyItem />}/>
             <Route path="/comingSoon" element={<ComingSoon />} />
             <Route path="*" element={<ComingSoon />} />
           </Routes>

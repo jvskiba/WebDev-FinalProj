@@ -1,24 +1,18 @@
 "use client"
-import styles from './ReviewForm.module.css';
-import CircleIcon from './CircleIcon';
-import { useState, ChangeEvent } from 'react';
-import Header from './Header';
-import { useLocation, useNavigate } from 'react-router-dom';
+import styles from './ModifyItem.module.css';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect, ChangeEvent } from 'react';
 import Image from 'next/image';
 import { Link } from 'react-router-dom';
 import LogoutBanner from './LogoutBanner';
+import Header from './Header';
+import CircleIcon from './CircleIcon';
 
 interface Review {
-    id: number;
+    _id: string;
+    restaurant: string;
     rating: string;
     review: string;
-}
-
-interface Restaurant {
-    id: number;
-    name: string;
-    image: string;
-    reviews: Review[];
 }
 
 const restaurantData = {
@@ -80,19 +74,44 @@ const restaurantData = {
     // Add other restaurants as needed
   };
 
-const isLoggedIn = true;
-
-const ReviewForm = () => {
-    const location = useLocation();
+export default function ModifyItem() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const params = useParams();
+    const id = params?.id as string;
     const { restaurantName } = location.state || {};
-
     const restaurant = restaurantData[restaurantName];
-
-    const [rating, setRating] = useState('0');
+    const [reviewItem, setReviewItem] = useState<Review>({ _id: id, restaurant: '', rating: '', review: ''});
+    const [rating, setRating] = useState('');
     const [review, setReview] = useState('');
     const [selectedRadio, setSelectedRadio] = useState('');
+    const [isLoaded, setIsLoaded] = useState(false);
 
+    useEffect( () => {
+        const fetchReview = async () => {
+            try {
+                const response = await fetch(`/api/modify-item/${id}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log('DATA::::');
+                console.log(data.review);
+                
+                await setRating(data.review.rating);
+                await setReview(data.review.review);
+                await setSelectedRadio(data.review.rating);
+            } catch (error) {
+                console.log('Error from ModifyItem');
+            }
+        };
+
+        if (id) {
+            fetchReview();
+            setIsLoaded(true);
+        }
+    }, [id]);    
+    
     const updateReview = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setReview(e.target.value);
     }
@@ -102,7 +121,23 @@ const ReviewForm = () => {
         setSelectedRadio(n);
     }
 
-    const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+    const handleDelete = async (e: React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch(`/api/modify-item/${id}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            navigate('/reviews', { state: { restaurantName: restaurantName } });
+        } catch (error) {
+            console.error('Error in ModifyItem');
+        }
+    }
+
+    const handleModify = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         // only submit if user has entered rating and review
@@ -115,8 +150,8 @@ const ReviewForm = () => {
             };
 
             try {
-                const response = await fetch('/api/leave-review', {
-                    method: 'POST',
+                const response = await fetch(`/api/modify-item/${id}`, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -133,7 +168,7 @@ const ReviewForm = () => {
 
                 navigate('/reviews', { state: { restaurantName: restaurantName } });
             } catch (error) {
-                console.error('Error in ReviewForm!', error);
+                console.error('Error in ModifyItem!', error);
             }
         }
         else {
@@ -141,12 +176,12 @@ const ReviewForm = () => {
         }
     };
 
+    const isLoggedIn = true;
+
     return (
         <div className={styles.pageContainer}>
             {isLoggedIn ? <LogoutBanner /> : <Header />}
-
             <h1 className={styles.name}>{restaurantName}</h1>
-
             <div className={styles.reviewComponents}>
                 <Image src={restaurant.image} alt={restaurant.name || 'Restaurant image'} 
                     width={250} height={250} className={styles.image}/>
@@ -216,12 +251,13 @@ const ReviewForm = () => {
                     </div>
 
                     {/* Submit Button*/}
-                    {isLoggedIn ? <button onClick={handleSubmit} className={styles.submitButton}>Submit</button> 
+                    {isLoggedIn ? <div className={styles.formButtons}>
+                                    <button onClick={handleModify} className={styles.submitButton}>Modify</button>
+                                    <button onClick={handleDelete}className={styles.submitButton}>Delete</button>
+                                  </div> 
                         : <Link to='/signin' className={styles.signinPrompt}>Sign in</Link>}
                 </form>
             </div>
         </div>
     );
 }
-
-export default ReviewForm;

@@ -3,13 +3,23 @@
     background-size: cover; 
     display: flex; 
     flex-direction: column; 
-    align-items: flex-start; 
+    align-items: flex; 
     padding: 20px; 
     height: 100vh;
  
   
 }
 
+.signinContainer {
+    max-width: 600px;
+    margin:  0px auto;
+    padding: 10px;  
+    border: none;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 
 .title {
     font-size: 4rem;
@@ -17,14 +27,12 @@
     font-family: 'Inter', sans-serif;
     text-align: left; 
     font-weight: bold;
-    margin-top: 150px; 
+    margin-top: 0px; 
     opacity: 0.8;
 }
 .para {
     font-weight: bolder;
     font-size: larger;
-    
-
 }
 
 .button {

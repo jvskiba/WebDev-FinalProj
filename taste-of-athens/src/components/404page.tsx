@@ -17,8 +17,10 @@ const HomePage = () => {
   return (
     <div className={styles.page}>
       <Header />
-      <h1 className={styles.title}>Page Coming Soon!</h1>
-      <button className={styles.button} onClick={handleBtnClick}>Home</button>
+      <div className={styles.signinContainer}>
+        <h1 className={styles.title}>Page Coming Soon!</h1>
+        <button className={styles.button} onClick={handleBtnClick}>Home</button>
+      </div>
     </div>
   );
 };

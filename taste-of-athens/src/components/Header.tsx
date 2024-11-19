@@ -38,7 +38,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-        <Image src="/images/logo.png" alt='Taste of Athens' width={150} height={500}
+        <Image src="/images/logo.png" alt='Taste of Athens' width={100} height={100}
                 className={styles.logo}/>
         <div className={styles.navList}>
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/')}>Home</button>

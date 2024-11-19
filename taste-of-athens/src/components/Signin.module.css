@@ -10,7 +10,7 @@
 
   .signinContainer {
     max-width: 400px;
-    margin:  100px auto;
+    margin:  0px auto;
     padding: 10px;  
     border: none;
     position: relative;
@@ -27,7 +27,7 @@
     opacity: 0.8;
     font-family: 'Inter', sans-serif;
     text-decoration: underline;
-    padding: 40px;
+    padding: 0px 40px 40px 40px;
     gap: 30px;
     text-underline-offset: 30px;
     text-decoration-thickness: 2px;

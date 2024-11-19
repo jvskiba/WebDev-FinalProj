@@ -3,6 +3,7 @@ import styles from './Reviews.module.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 interface ReviewsProps {}
 
@@ -50,6 +51,7 @@ const Reviews: React.FC<ReviewsProps> = () => {
 
     return (
         <div>
+            <Header />
             <h1 className={styles.header}>Reviews & Ratings</h1>
 
             

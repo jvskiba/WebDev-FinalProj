@@ -18,8 +18,13 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
   
-    // only submit if user has entered a username and password
-    if (username !== '' && password !== '') {
+    // only submit if user has entered a username and password and passwords match
+    if (password !== confirmPassword) {
+      alert("Passwords don't match");
+    }
+    if (username == '' && password == '') {
+      alert('Please enter a username and password');
+    }
         // create new user object
         const newUser = {
             username: username,
@@ -46,10 +51,6 @@ const Register = () => {
         } catch (error) {
             console.error('Error in Signup!', error);
         }
-    }
-    else {
-        alert('Please enter a username and password')
-    }
   };
 
 

@@ -5,6 +5,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "./models/userSchema";
 
+interface UserType {
+    id: string;
+    username: string;
+    password: string;
+}
+
 export const {
     handlers: { GET, POST},
     auth,
@@ -15,22 +21,24 @@ export const {
 providers: [
     CredentialsProvider({ 
         credentials: {
-        username: {},
-        password: {},
-    },
+            username: { label: "Username", type: "text" },
+            password: { label: "Password", type: "password" },
+        },
     async authorize(credentials) {
         if (!credentials) return null;
+        console.log(User);
         try {
-            const user = await User.findOne({ username: credentials.username }).lean();
+            const user = await User.findOne({ username: credentials.username }).lean<UserType | null>();
             if (user) {
+                const password = String(credentials.password);
                 const isMatch = await bcrypt.compare(
-                credentials.password,
+                password,
                 user.password
             );
 
                 if (isMatch) {
                     return{
-                        //id: user.id.toString(),
+                        id: user.id.toString(),
                         name: user.username,
                     };
                 } else {

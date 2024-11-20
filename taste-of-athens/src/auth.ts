@@ -30,7 +30,7 @@ providers: [
 
                 if (isMatch) {
                     return{
-                        id: user.id.toString(),
+                        //id: user.id.toString(),
                         name: user.username,
                     };
                 } else {

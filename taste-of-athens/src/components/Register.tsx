@@ -6,12 +6,52 @@ import styles from './Signin.module.css';
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import Header from '../components/Header';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+
+  //Create new user code
+  const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+  
+    // only submit if user has entered a username and password
+    if (username !== '' && password !== '') {
+        // create new user object
+        const newUser = {
+            username: username,
+            password: password
+        };
+  
+        try {
+            const response = await fetch('/api/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newUser),
+            });
+  
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+  
+            setUsername(''); // reset username
+            setPassword(''); // reset password
+  
+            navigate('/');
+        } catch (error) {
+            console.error('Error in Signup!', error);
+        }
+    }
+    else {
+        alert('Please enter a username and password')
+    }
+  };
+
 
   return (
    <div className = {styles.signinPage}>
@@ -49,7 +89,7 @@ const Register = () => {
           />
             <FaLock className = {styles.lockIcon} size = {30} />
         </div>  
-        <button type="submit">Register</button>
+        <button type="submit" onClick={handleSubmit}>Register</button>
         <p className = {styles.paralink}>Already have an account? <Link to="/signin" className={styles.links}>Sign In Now!</Link></p>
       </form>
       <div>

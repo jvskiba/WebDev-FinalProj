@@ -6,13 +6,16 @@ import styles from './Signin.module.css';
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import Header from '../components/Header';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+
 
 const Signin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-
+  
   return (
     <div className={styles.signinPage}>
       <Header />
@@ -41,7 +44,7 @@ const Signin = () => {
             <FaLock className={styles.lockIcon} size={30} />
             <Link to="/forgotpassword" className={styles.links}> Forgot Password?</Link>
           </div>
-          <button type="submit">Sign In</button>
+          <button type="submit" >Sign In</button>
           <p className={styles.paralink}>Don't have an account? <Link to="/register" className={styles.links}>Register Now!</Link></p>
         </form>
         <div>
@@ -54,3 +57,29 @@ const Signin = () => {
 };
 
 export default Signin;
+
+/*
+
+
+import { signIn, signOut } from "@/auth";
+
+export async function doLogout() {
+await signOut({ redirectTo: "/"});
+}
+
+export async function doCredentialLogin (formData: FormData): Promise<any> {
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    try {
+        const response = await signIn("credentials", { 
+            email, password,
+            redirect: false,
+        });
+        return response;
+    } catch (err: any) {
+        throw err;
+    }
+}
+
+
+*/

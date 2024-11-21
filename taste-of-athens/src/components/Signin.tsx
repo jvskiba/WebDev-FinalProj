@@ -22,14 +22,14 @@ const Signin = () => {
     const formData = new FormData(form);
 
     try {
-      /*const response = await doCredentialLogin(formData);
+      const response = await doCredentialLogin(formData);
       if (response?.ok) {
         console.log("Login successful!");
         // Redirect or handle success logic
       } else {
         console.error("Login failed:", response?.error);
         // Handle login failure (e.g., show an error message)
-      }*/
+      }
     } catch (err) {
       console.error("An error occurred during login:", err);
     }

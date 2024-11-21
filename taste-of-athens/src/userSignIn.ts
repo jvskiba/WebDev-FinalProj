@@ -1,7 +1,8 @@
 import { signIn, signOut } from "@/auth";
+import connectMongoDB from "./libs/mongodb";
 
 export async function doLogout() {
-await signOut({ redirectTo: "/"});
+//await signOut({ redirectTo: "/"});
 }
 
 export async function doCredentialLogin (formData: FormData): Promise<any> {

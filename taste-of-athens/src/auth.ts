@@ -3,7 +3,8 @@ import { authConfig } from "./auth.config";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"; 
 import bcrypt from "bcryptjs";
-import User from "./models/userSchema";
+import { User } from "./models/userSchema";
+import connectMongoDB from "./libs/mongodb";
 
 interface UserType {
     id: string;
@@ -26,9 +27,12 @@ providers: [
         },
     async authorize(credentials) {
         if (!credentials) return null;
-        console.log(User);
+        
         try {
-            const user = await User.findOne({ username: credentials.username }).lean<UserType | null>();
+            var user = null;
+            /*if (User !== undefined) {
+                user = await User.findOne({ username: credentials.username }).lean<UserType | null>();
+            }  */          
             if (user) {
                 const password = String(credentials.password);
                 const isMatch = await bcrypt.compare(

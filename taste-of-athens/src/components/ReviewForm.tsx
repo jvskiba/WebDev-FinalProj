@@ -7,12 +7,17 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Image from 'next/image';
 import { Link } from 'react-router-dom';
 import LogoutBanner from './LogoutBanner';
+import { useRouter } from 'next/navigation';
 
 interface Review {
     id: number;
     rating: string;
     review: string;
 }
+
+interface RestaurantInfoProps {
+    restaurantName: keyof typeof restaurantData;
+  }
 
 interface Restaurant {
     id: number;
@@ -82,10 +87,8 @@ const restaurantData = {
 
 const isLoggedIn = true;
 
-const ReviewForm = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const { restaurantName } = location.state || {};
+const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
+    const router = useRouter();
 
     const restaurant = restaurantData[restaurantName];
 
@@ -131,7 +134,7 @@ const ReviewForm = () => {
                 setSelectedRadio(''); // reset selected radio
                 setReview(''); // reset textbox
 
-                navigate('/reviews', { state: { restaurantName: restaurantName } });
+                router.push(`/reviews?name=${encodeURIComponent(restaurantName)}`);
             } catch (error) {
                 console.error('Error in ReviewForm!', error);
             }
@@ -148,7 +151,7 @@ const ReviewForm = () => {
             <h1 className={styles.name}>{restaurantName}</h1>
 
             <div className={styles.reviewComponents}>
-                <Image src={restaurant.image} alt={restaurant.name || 'Restaurant image'} 
+                <Image src={restaurant.image} alt={restaurantName || 'Restaurant image'} 
                     width={250} height={250} className={styles.image}/>
 
                 <form className={styles.formContainer}>

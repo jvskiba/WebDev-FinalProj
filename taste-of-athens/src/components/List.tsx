@@ -6,6 +6,7 @@ import styles from './List.module.css';
 import Image from 'next/image';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import { useRouter } from 'next/navigation';
 
 interface Restaurant {
   name: string;
@@ -22,10 +23,10 @@ const restaurantData: Restaurant[] = [
 ];
 
 const List: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleLearnMore = (name: string) => {
-    navigate('/details', { state: { restaurantName: name } });
+    router.push(`/details?name=${encodeURIComponent(name)}`);
   };
 
   return (

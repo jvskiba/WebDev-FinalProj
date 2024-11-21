@@ -1,13 +1,18 @@
-"use client"
-import Reviews from '../../components/Reviews';
+"use client";
 
-interface ReviewsPageProps {
+import React from 'react';
+import { useSearchParams } from 'next/navigation';
+import Reviews from '@/components/Reviews';
 
-}
+const ReviewsPage: React.FC = () => {
+  const searchParams = useSearchParams();
+  const name = searchParams.get('name');
 
-const ReviewsPage: React.FC<ReviewsPageProps> = () => {
-    return (
-        <Reviews />
-    );
-}
+  if (!name) {
+    return <p>Restaurant not specified.</p>;
+  }
+
+  return <Reviews restaurantName={name} />;
+};
+
 export default ReviewsPage;

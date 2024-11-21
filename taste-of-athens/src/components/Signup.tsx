@@ -1,18 +1,18 @@
 "use client"; 
 
-
 import React, { useState } from 'react';
 import styles from './Signin.module.css'; 
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
-import Header from '../components/Header';
-import { Link, useNavigate } from 'react-router-dom';
+import Header from './Header';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-const Register = () => {
+const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const navigate = useNavigate();
+  const router = useRouter();
 
   //Create new user code
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
@@ -47,7 +47,7 @@ const Register = () => {
             setUsername(''); // reset username
             setPassword(''); // reset password
   
-            navigate('/');
+            router.push('/');
         } catch (error) {
             console.error('Error in Signup!', error);
         }
@@ -91,7 +91,7 @@ const Register = () => {
             <FaLock className = {styles.lockIcon} size = {30} />
         </div>  
         <button type="submit" onClick={handleSubmit}>Register</button>
-        <p className = {styles.paralink}>Already have an account? <Link to="/signin" className={styles.links}>Sign In Now!</Link></p>
+        <p className = {styles.paralink}>Already have an account? <Link href="/signin" className={styles.links}>Sign In Now!</Link></p>
       </form>
       <div>
       
@@ -102,4 +102,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Signup;

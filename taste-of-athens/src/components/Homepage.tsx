@@ -1,16 +1,16 @@
 "use client"; 
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation'
 import Header from '../components/Header';
 import styles from '../components/Homepage.module.css';
 import { FaLocationDot } from "react-icons/fa6";
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   
   const handleBtnClick = () => {
-    navigate('/comingSoon');
+    router.push('/comingSoon');
   };
 
   return (

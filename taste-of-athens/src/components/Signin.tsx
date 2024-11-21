@@ -5,13 +5,12 @@ import styles from './Signin.module.css';
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import Header from '../components/Header';
-import { Link, useNavigate } from 'react-router-dom';
 import { doCredentialLogin } from "../userSignIn"
+import Link from 'next/link';
 
 const Signin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   //Create new user code
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,10 +60,10 @@ const Signin = () => {
               required
             />
             <FaLock className={styles.lockIcon} size={30} />
-            <Link to="/forgotpassword" className={styles.links}> Forgot Password?</Link>
+            <Link href="/comingSoon" className={styles.links}> Forgot Password?</Link>
           </div>
           <button type="submit" >Sign In</button>
-          <p className={styles.paralink}>Don't have an account? <Link to="/register" className={styles.links}>Register Now!</Link></p>
+          <p className={styles.paralink}>Don't have an account? <Link href="/signup" className={styles.links}>Sign Up Now!</Link></p>
         </form>
         <div>
 

@@ -1,15 +1,15 @@
 "use client"; // Marks this file as a Client Component
 
 import React from 'react';
-import Signin from '../../components/Signin';
+import HomePage from '@/components/Homepage';
 
-const SigninPage = () => {
+const homePage = () => {
   return (
    
     <div >
-      <Signin />
+      <HomePage />
     </div>
   );
 };
 
-export default SigninPage;
+export default homePage;

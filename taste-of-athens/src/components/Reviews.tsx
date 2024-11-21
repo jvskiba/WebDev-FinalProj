@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Header from './Header';
+import { useRouter } from 'next/navigation';
 
 interface ReviewsProps {}
 
@@ -14,15 +15,14 @@ interface Review {
     review: string;
 }
 
+interface RestaurantInfoProps {
+    restaurantName: string;
+  }
 
-
-const Reviews: React.FC<ReviewsProps> = () => {
+const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
+    const router = useRouter();
     const [reviews, setReviews] = useState<Review[]>([]);
     const [isLoaded, setIsLoaded] = useState(false);
-
-    const location = useLocation();
-    const navigate = useNavigate();
-    const { restaurantName } = location.state || {};
     
     useEffect( () => {
         const fetchReviews = async () => {
@@ -46,7 +46,7 @@ const Reviews: React.FC<ReviewsProps> = () => {
     }, []);
 
     const handleDelete = () => {
-        navigate('/');
+        router.push('/');
     }
 
     return (
@@ -61,7 +61,7 @@ const Reviews: React.FC<ReviewsProps> = () => {
                     review => <li key={review._id} className={styles.review}>
                         <p>Rating: {review.rating}</p>
                         <p>Review: {review.review}</p>
-                        <button onClick={() => {navigate(`/modify-item/${review._id}`, { state: { restaurantName: restaurantName } })}}>Modify Review</button>
+                        <button onClick={() => {router.push(`/modify-item/${review._id}?name=${encodeURIComponent(restaurantName)}`)}}>Modify Review</button>
                         </li>
                 )}
             </ul> : <></>}

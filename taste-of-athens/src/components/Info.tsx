@@ -4,8 +4,8 @@
 import React from 'react';
 import styles from './Info.module.css';
 import Image from 'next/image';
-import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import { useRouter } from 'next/navigation';
 
 interface RestaurantInfoProps {
   restaurantName: keyof typeof restaurantData;
@@ -76,23 +76,22 @@ const restaurantData = {
   // Add other restaurants as needed
 };
 
-const Info = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { restaurantName } = location.state || {};
+const Info: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
+  const router = useRouter();
 
   const restaurant = restaurantData[restaurantName];
 
   const handleLeaveReview = (name: string) => {
-    navigate('/writeReview', { state: { restaurantName: name } });
+    router.push(`/write-review?name=${encodeURIComponent(name)}`);
+    
   };
 
   const handleViewReviews = (name: string) => {
-    navigate('/reviews', { state: { restaurantName: name } });
+    router.push(`/reviews?name=${encodeURIComponent(name)}`);
   };
 
   const handleBtnClick = () => {
-    navigate('/comingSoon');
+    router.push('/comingSoon');
   };
 
   if (!restaurant) {

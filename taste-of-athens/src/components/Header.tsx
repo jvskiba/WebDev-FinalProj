@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react'; 
 import styles from './Header.module.css'; 
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useRouter } from 'next/navigation'
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState(''); 
@@ -31,9 +31,9 @@ const Header = () => {
   };
 
   const btnClass = getTextColor(location.pathname);
-  const navigate = useNavigate();
+  const router = useRouter()
   const handleLinkPress = (path: string) => {
-    navigate(path);
+    router.push(path);
   }
 
   return (

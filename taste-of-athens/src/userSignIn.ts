@@ -1,4 +1,5 @@
-import { signIn, signOut } from "@/auth";
+import { signIn } from "next-auth/react";
+//import { signIn, signOut } from "@/auth";
 import connectMongoDB from "./libs/mongodb";
 
 export async function doLogout() {
@@ -6,11 +7,11 @@ export async function doLogout() {
 }
 
 export async function doCredentialLogin (formData: FormData): Promise<any> {
-    const email = formData.get("email") as string;
+    const username = formData.get("username") as string;
     const password = formData.get("password") as string;
     try {
         const response = await signIn("credentials", { 
-            email, password,
+            username, password,
             redirect: false,
         });
         return response;

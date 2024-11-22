@@ -1,4 +1,47 @@
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import connectMongoDB from "./libs/mongodb";
+import { User } from "./models/userSchema";
+import { verifyPassword } from "./libs/auth";
 
+const handler = NextAuth({
+  providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "jvskeeb" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        await connectMongoDB();
+
+        // Find user by email
+        const user = await User.findOne({ email: credentials?.username });
+
+        if (!user) {
+          throw new Error("No user found with the provided email.");
+        }
+
+        // Verify password
+        const isValid = await verifyPassword(credentials?.password!, user.password);
+        if (!isValid) {
+          throw new Error("Invalid credentials.");
+        }
+
+        return { id: user._id.toString(), email: user.email, name: user.name };
+      },
+    }),
+  ],
+  pages: {
+    signIn: "/login",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+});
+
+export { handler as GET, handler as POST };
+
+
+/*
 import { authConfig } from "./auth.config";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"; 
@@ -30,9 +73,10 @@ providers: [
         
         try {
             var user = null;
+            await connectMongoDB();
             if (User !== undefined) {
                 user = await User.findOne({ username: credentials.username }).lean<UserType | null>();
-            }         
+            }        
             if (user) {
                 const password = String(credentials.password);
                 const isMatch = await bcrypt.compare(
@@ -61,3 +105,4 @@ providers: [
 }),
 ],
 });
+*/

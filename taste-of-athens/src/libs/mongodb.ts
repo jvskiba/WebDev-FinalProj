@@ -18,3 +18,4 @@ const connectMongoDB = async (): Promise<void> => {
 
 
 export default connectMongoDB;
+

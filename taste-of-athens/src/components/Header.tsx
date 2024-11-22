@@ -12,8 +12,6 @@ const Header = () => {
     setSearchTerm(event.target.value); 
   };
 
-  //const location = useLocation();
-
   // Function to determine text color based on the current route
   const getTextColor = (path: string) => {
     switch (path) {

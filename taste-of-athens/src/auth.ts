@@ -30,9 +30,9 @@ providers: [
         
         try {
             var user = null;
-            /*if (User !== undefined) {
+            if (User !== undefined) {
                 user = await User.findOne({ username: credentials.username }).lean<UserType | null>();
-            }          */
+            }         
             if (user) {
                 const password = String(credentials.password);
                 const isMatch = await bcrypt.compare(

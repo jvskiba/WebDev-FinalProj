@@ -21,6 +21,8 @@ const Header = () => {
         return styles.light;
       case '/signin':
         return styles.light;
+      case '/signup':
+        return styles.light;
       case '/register':
         return styles.light;
       case '/resturants':
@@ -42,7 +44,7 @@ const Header = () => {
                 className={styles.logo}/>
         <div className={styles.navList}>
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/')}>Home</button>
-          <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/list')}>Restaurants</button>
+          <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/resturants')}>Restaurants</button>
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signin')}>Sign In</button>
           <div className={styles.searchContainer}>
             <input 

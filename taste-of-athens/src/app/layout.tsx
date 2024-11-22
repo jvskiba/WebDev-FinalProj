@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 
 export default function RootLayout({
@@ -10,6 +8,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <title>Taste of Athens</title>
         {children}
       </body>
     </html>

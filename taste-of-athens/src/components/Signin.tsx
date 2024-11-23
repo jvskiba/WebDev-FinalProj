@@ -7,12 +7,14 @@ import { FaLock } from "react-icons/fa";
 import Header from '../components/Header';
 import { doCredentialLogin } from "../userSignIn"
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const Signin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
-  //Create new user code
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent default form submission
 
@@ -24,10 +26,11 @@ const Signin = () => {
       const response = await doCredentialLogin(formData);
       if (response?.ok) {
         console.log("Login successful!");
-        // Redirect or handle success logic
+        setUsername(''); 
+        setPassword('');
+        router.push(`/`);
       } else {
         console.error("Login failed:", response?.error);
-        // Handle login failure (e.g., show an error message)
       }
     } catch (err) {
       console.error("An error occurred during login:", err);
@@ -43,17 +46,18 @@ const Signin = () => {
           <div>
             <label>Username:</label>
             <input
+              name='username'
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-
             />
             <FaUser className={styles.userIcon} size={30} />
           </div>
           <div>
             <label>Password:</label>
             <input
+              name='password'
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -65,62 +69,9 @@ const Signin = () => {
           <button type="submit" >Sign In</button>
           <p className={styles.paralink}>Don't have an account? <Link href="/signup" className={styles.links}>Sign Up Now!</Link></p>
         </form>
-        <div>
-
-
-        </div>
       </div>
     </div>
   );
 };
 
 export default Signin;
-
-/*
-
-
-import { signIn, signOut } from "@/auth";
-
-export async function doLogout() {
-await signOut({ redirectTo: "/"});
-}
-
-export async function doCredentialLogin (formData: FormData): Promise<any> {
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    try {
-        const response = await signIn("credentials", { 
-            email, password,
-            redirect: false,
-        });
-        return response;
-    } catch (err: any) {
-        throw err;
-    }
-}
-
-
-*/
-
-/*
-e.preventDefault();
-
-    // only submit if user has entered a username and password
-    if (username == '' && password == '') {
-      alert('Please enter a username and password');
-    }
-    console.log("test");
-    try {
-      const response = await signIn("credentials", { 
-        username, password,
-        redirect: false,
-      });
-      setUsername(''); // reset username
-      setPassword(''); // reset password
-
-      navigate('/');
-      return response; 
-    } catch (err: any) {
-      throw err;
-    }
-      */

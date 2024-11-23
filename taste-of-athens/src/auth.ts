@@ -1,8 +1,12 @@
+/* Jake code
+
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectMongoDB from "./libs/mongodb";
 import { User } from "./models/userSchema";
 import { verifyPassword } from "./libs/auth";
+
+
 
 const handler = NextAuth({
   providers: [
@@ -39,9 +43,9 @@ const handler = NextAuth({
 });
 
 export { handler as GET, handler as POST };
+*/ 
 
 
-/*
 import { authConfig } from "./auth.config";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"; 
@@ -50,7 +54,7 @@ import { User } from "./models/userSchema";
 import connectMongoDB from "./libs/mongodb";
 
 interface UserType {
-    id: string;
+    _id: string;
     username: string;
     password: string;
 }
@@ -62,47 +66,46 @@ export const {
     signOut,
 } = NextAuth({
     ...authConfig,
-providers: [
+  providers: [
     CredentialsProvider({ 
         credentials: {
-            username: { label: "Username", type: "text" },
-            password: { label: "Password", type: "password" },
+            username: { label: "username", type: "text" },
+            password: { label: "password", type: "password" },
         },
-    async authorize(credentials) {
-        if (!credentials) return null;
+        async authorize(credentials) {
+            if (!credentials) return null;
         
-        try {
-            var user = null;
-            await connectMongoDB();
-            if (User !== undefined) {
-                user = await User.findOne({ username: credentials.username }).lean<UserType | null>();
-            }        
-            if (user) {
-                const password = String(credentials.password);
-                const isMatch = await bcrypt.compare(
-                password,
-                user.password
-            );
+            try {
+                var user = null;
+                await connectMongoDB();
+                if (User !== undefined) {
+                    user = await User.findOne({ username: credentials.username }).lean<UserType | null>();
+                }        
+                if (user) {
+                    const password = String(credentials.password);
+                    const isMatch = await bcrypt.compare(
+                      password,
+                      user.password
+                    );
 
-                if (isMatch) {
-                    return{
-                        id: user.id.toString(),
-                        name: user.username,
-                    };
+                    if (isMatch) {
+                        return{
+                            id: user._id.toString(),
+                            name: user.username,
+                        };
+                    } else {
+                        console.log("Email or Password is not correct"); 
+                        return null;
+                    }
                 } else {
-                    console.log("Email or Password is not correct"); 
+                    console.log("User not found");
                     return null;
                 }
-            } else {
-                console.log("User not found");
+            } catch (error: any) {
+                console.log("An error occurred: ", error);
                 return null;
             }
-        } catch (error: any) {
-            console.log("An error occurred: ", error);
-            return null;
-        }
-    },
-}),
+        },
+    }),
 ],
 });
-*/

@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import { authConfig } from "./auth.config"; 
 import NextAuth from "next-auth";
 
-const { auth} = NextAuth (authConfig);
+const { auth } = NextAuth(authConfig);
 
-export async function middleware (request: any) { 
+export async function middleware(request: any) { 
     const {nextUrl} = request;
     const session = await auth();
     const isAuthenticated = !!session?.user;

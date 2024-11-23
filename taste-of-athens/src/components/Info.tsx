@@ -83,7 +83,6 @@ const Info: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
 
   const handleLeaveReview = (name: string) => {
     router.push(`/write-review?name=${encodeURIComponent(name)}`);
-    
   };
 
   const handleViewReviews = (name: string) => {

@@ -16,6 +16,6 @@ export async function POST(request: NextRequest) {
         await User.create(newUser);
         return NextResponse.json({ message: 'User added successfully '}, { status: 201});
     } catch {
-        return NextResponse.json({ message: 'User add failed'}, { status: 201}); // wrong status
+        return NextResponse.json({ message: 'User add failed'}, { status: 400}); // wrong status
     }
 }

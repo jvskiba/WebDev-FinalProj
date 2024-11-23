@@ -22,9 +22,10 @@ const Signup = () => {
     if (password !== confirmPassword) {
       alert("Passwords don't match");
     }
-    if (username == '' && password == '') {
+    else if (username == '' || password == '') {
       alert('Please enter a username and password');
     }
+    else {
         // create new user object
         const newUser = {
             username: username,
@@ -32,7 +33,7 @@ const Signup = () => {
         };
   
         try {
-            const response = await fetch('/api/auth', {
+            const response = await fetch('/api/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,6 +52,7 @@ const Signup = () => {
         } catch (error) {
             console.error('Error in Signup!', error);
         }
+      }
   };
 
 

@@ -42,7 +42,10 @@ const Signup = () => {
                 body: JSON.stringify(newUser),
             });
   
-            if (!response.ok) {
+            if (response.status === 403) {
+                alert('This username is already taken. Please choose another.');
+                return;
+            } else if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
   

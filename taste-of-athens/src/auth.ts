@@ -94,7 +94,7 @@ export const {
                             name: user.username,
                         };
                     } else {
-                        console.log("Email or Password is not correct"); 
+                        console.log("Username or Password is not correct"); 
                         return null;
                     }
                 } else {

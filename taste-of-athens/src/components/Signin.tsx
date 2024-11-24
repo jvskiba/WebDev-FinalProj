@@ -24,13 +24,13 @@ const Signin = () => {
 
     try {
       const response = await doCredentialLogin(formData);
-      if (response?.ok) {
+      if (response.error === null && response?.ok) {
         console.log("Login successful!");
         setUsername(''); 
         setPassword('');
         router.push(`/`);
       } else {
-        console.error("Login failed:", response?.error);
+        alert('Please ensure you have entered the correct username and password.');
       }
     } catch (err) {
       console.error("An error occurred during login:", err);

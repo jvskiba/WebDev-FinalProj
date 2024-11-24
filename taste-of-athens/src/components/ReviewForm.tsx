@@ -12,6 +12,7 @@ interface Review {
     id: number;
     rating: string;
     review: string;
+    imageUrl: string;
 }
 
 interface RestaurantInfoProps {
@@ -94,6 +95,8 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
     const [rating, setRating] = useState('0');
     const [review, setReview] = useState('');
     const [selectedRadio, setSelectedRadio] = useState('');
+    const [image, setImage] = useState<File | null>(null); // state to store selected image
+    const [imagePreview, setImagePreview] = useState<string | null>(null); // state to store image preview URL
 
     const updateReview = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setReview(e.target.value);
@@ -103,6 +106,13 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
         setRating(n);
         setSelectedRadio(n);
     }
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]; // Get the first file
+        if (file) {
+            setImage(file);
+            setImagePreview(URL.createObjectURL(file)); // Set image preview URL
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -114,9 +124,11 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                 restaurant: restaurantName,
                 rating: rating,
                 review: review,
+                imageUrl: imagePreview, // Save the image preview URL (or upload the image to the backend
             };
 
             try {
+
                 const response = await fetch('/api/leave-review', {
                     method: 'POST',
                     headers: {
@@ -132,6 +144,8 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                 setRating('0'); // reset rating value
                 setSelectedRadio(''); // reset selected radio
                 setReview(''); // reset textbox
+                setImage(null); // Clear selected image
+                setImagePreview(null); // Clear image preview
 
                 router.push(`/reviews?name=${encodeURIComponent(restaurantName)}`);
             } catch (error) {
@@ -215,6 +229,27 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                         <h3>What feedback do you have?</h3>
                         <textarea value={review} placeholder={'Leave a review'} cols={40} rows ={8}
                             onChange={updateReview} className={styles.textbox}/>
+                    </div>
+
+                    {/* Image Upload */}
+                    <div className={styles.imageUpload}>
+                        <label htmlFor="image" className={styles.imageLabel}>
+                            Upload an Image (Optional)
+                        </label>
+                        <input 
+                            type="file" 
+                            id="image" 
+                            onChange={handleImageChange} 
+                            accept="image/*"
+                            className={styles.imageInput} 
+                        />
+
+                        {/* Display Image Preview */}
+                        {imagePreview && (
+                            <div className={styles.imagePreviewContainer}>
+                                <img src={imagePreview} alt="Preview" className={styles.imagePreview} />
+                            </div>
+                        )}
                     </div>
 
                     {/* Submit Button*/}

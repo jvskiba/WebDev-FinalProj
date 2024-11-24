@@ -13,6 +13,7 @@ interface Review {
     restaurant: string;
     rating: string;
     review: string;
+    imageUrl:string;
 }
 
 interface RestaurantInfoProps {
@@ -33,6 +34,7 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                 }
 
                 const data = await response.json();
+                 console.log(data);  // Check the structure of the data
 
                 setReviews(data.reviews.filter(
                     (review: Review)  => review.restaurant === restaurantName
@@ -59,9 +61,11 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
             <ul className={styles.reviewDisplay}>
                 {reviews.map( 
                     review => <li key={review._id} className={styles.review}>
-                        <p>Rating: {review.rating}</p>
-                        <p>Review: {review.review}</p>
-                        <button onClick={() => {router.push(`/modify-review/${review._id}?name=${encodeURIComponent(restaurantName)}&id=${encodeURIComponent(review._id)}`)}}>Modify Review</button>
+                        <p className={styles.userReview}>Rating: {review.rating}</p>
+                        <p className={styles.userReview}>Review: {review.review}</p>
+                      
+
+                        <button className={styles.modifyReviewButton} onClick={() => {router.push(`/modify-review/${review._id}?name=${encodeURIComponent(restaurantName)}&id=${encodeURIComponent(review._id)}`)}}>Modify Review</button>
                         </li>
                 )}
             </ul> : <></>}

@@ -34,7 +34,7 @@ body {
 .ratingsDisplay {
     grid-row: 4;
     justify-self: center;
-    border: 1px #171717 solid;
+    border: 1px #000000 solid;
     padding: 5px;
     border-radius: 20px;
 }

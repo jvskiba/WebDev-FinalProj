@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import React, { useState } from 'react'; 
 import styles from './Header.module.css'; 
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation';
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState(''); 
@@ -24,13 +24,16 @@ const Header = () => {
       case '/register':
         return styles.light;
       case '/resturants':
-        return styles.dark;
+        return styles.light;
+      case '/details':
+        return styles.light;
       default:
         return styles.dark;
     }
   };
 
-  const btnClass = getTextColor(location.pathname);
+  const pathname = usePathname();
+  const btnClass = getTextColor(pathname);
   const router = useRouter()
   const handleLinkPress = (path: string) => {
     router.push(path);
@@ -44,6 +47,7 @@ const Header = () => {
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/')}>Home</button>
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/resturants')}>Restaurants</button>
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signin')}>Sign In</button>
+          <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signup')}>Sign Up</button>
           <div className={styles.searchContainer}>
             <input 
               type="text" 

@@ -1,5 +1,4 @@
 import { signIn, signOut } from "next-auth/react";
-import connectMongoDB from "./libs/mongodb";
 
 // Function to logout and return to home
 export async function doLogout() {

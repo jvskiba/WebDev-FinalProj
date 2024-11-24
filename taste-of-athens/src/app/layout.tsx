@@ -1,4 +1,5 @@
 import "./globals.css";
+import { SessionProvider } from 'next-auth/react';
 
 export default function RootLayout({
   children,
@@ -9,7 +10,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <title>Taste of Athens</title>
-        {children}
+        <SessionProvider>
+          {children}
+        </SessionProvider>
+       
       </body>
     </html>
   );

@@ -4,6 +4,8 @@ import Image from 'next/image';
 import React, { useState } from 'react'; 
 import styles from './Header.module.css'; 
 import { useRouter, usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { doLogout } from '../userSignIn';
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState(''); 
@@ -39,6 +41,8 @@ const Header = () => {
     router.push(path);
   }
 
+  const { data: session } = useSession();
+
   return (
     <header className={styles.header}>
         <Image src="/images/logo.png" alt='Taste of Athens' width={100} height={100}
@@ -46,8 +50,10 @@ const Header = () => {
         <div className={styles.navList}>
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/')}>Home</button>
           <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/resturants')}>Restaurants</button>
-          <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signin')}>Sign In</button>
-          <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signup')}>Sign Up</button>
+          {!session ? <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signin')}>Sign In</button>
+            : <button className={`${styles.button} ${btnClass}`} onClick={doLogout}>Logout</button>}
+          {!session ? <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signup')}>Sign Up</button>
+            : <button className={`${styles.button} ${btnClass} ${styles.greeting}`}>Welcome, {session.user.name}</button>}
           <div className={styles.searchContainer}>
             <input 
               type="text" 

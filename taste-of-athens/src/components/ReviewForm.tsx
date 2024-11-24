@@ -3,7 +3,6 @@ import styles from './ReviewForm.module.css';
 import CircleIcon from './CircleIcon';
 import { useState, ChangeEvent } from 'react';
 import Header from './Header';
-import { useLocation, useNavigate } from 'react-router-dom';
 import Image from 'next/image';
 import { Link } from 'react-router-dom';
 import LogoutBanner from './LogoutBanner';

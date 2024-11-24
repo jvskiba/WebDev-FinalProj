@@ -55,3 +55,7 @@
 .searchContainer {
   align-self: center;
 }
+
+.greeting:hover {
+  cursor: default;
+}

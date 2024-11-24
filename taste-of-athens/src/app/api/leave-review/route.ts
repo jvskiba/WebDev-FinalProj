@@ -5,6 +5,10 @@ import { NextResponse, NextRequest } from 'next/server';
 export async function POST(request: NextRequest) {
     const { restaurant, rating, review } = await request.json();
     await connectMongoDB();
-    await Review.create({ restaurant, rating, review });
-    return NextResponse.json({ message: 'Review added successfully '}, { status: 201});
+    try {
+        await Review.create({ restaurant, rating, review });
+        return NextResponse.json({ message: 'Review added successfully '}, { status: 201});
+    } catch (err) {
+        return NextResponse.json({ message: 'Failed to add review' }, { status: 400});
+    }
 }

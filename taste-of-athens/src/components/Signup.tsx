@@ -7,6 +7,7 @@ import { FaLock } from "react-icons/fa";
 import Header from './Header';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { doCredentialLogin } from "../userSignIn";
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -15,7 +16,7 @@ const Signup = () => {
   const router = useRouter();
 
   //Create new user code
-  const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   
     // only submit if user has entered a username and password and passwords match
@@ -47,7 +48,24 @@ const Signup = () => {
   
             setUsername(''); // reset username
             setPassword(''); // reset password
-  
+            
+            // log in the user
+            const form = e.target as HTMLFormElement;
+            const formData = new FormData(form);
+            try {
+              const response = await doCredentialLogin(formData);
+              if (response?.ok) {
+                console.log("Login successful!");
+                setUsername(''); 
+                setPassword('');
+                router.push(`/`);
+              } else {
+                console.error("Login failed:", response?.error);
+              }
+            } catch (err) {
+              console.error("An error occurred during login:", err);
+            }
+
             router.push('/');
         } catch (error) {
             console.error('Error in Signup!', error);
@@ -61,10 +79,11 @@ const Signup = () => {
     <Header />
      <div className={styles.signinContainer}>
       <h1 >Register</h1>
-      <form className={styles.signinForm}>
+      <form className={styles.signinForm} onSubmit={handleSubmit}>
         <div>
           <label>Username:</label>
           <input
+            name='username'
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -75,6 +94,7 @@ const Signup = () => {
         <div>
           <label>Password:</label>
           <input
+            name='password'
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -92,7 +112,7 @@ const Signup = () => {
           />
             <FaLock className = {styles.lockIcon} size = {30} />
         </div>  
-        <button type="submit" onClick={handleSubmit}>Register</button>
+        <button type="submit">Register</button>
         <p className = {styles.paralink}>Already have an account? <Link href="/signin" className={styles.links}>Sign In Now!</Link></p>
       </form>
       <div>

@@ -1,5 +1,4 @@
 import { signIn, signOut } from "next-auth/react";
-import { AuthError } from "next-auth";
 
 // Function to logout and return to home
 export async function doLogout() {
@@ -20,15 +19,6 @@ export async function doCredentialLogin (formData: FormData): Promise<any> {
         );
         return response;
     } catch (err: any) {
-      if (err instanceof AuthError) {
-        switch (err.type) {
-                  case "CredentialsSignin":
-                      return { msg: "Invalid credentials" , status: "error"};
-                  case "CredentialsSignin":
-                      throw err;
-                  default:
-                      return { msg: "Something went wrong", status: "error" };
-              }
-      }
+        throw err;
     }
   }

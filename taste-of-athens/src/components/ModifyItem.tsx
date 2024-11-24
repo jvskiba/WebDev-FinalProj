@@ -1,12 +1,18 @@
 "use client"
 import styles from './ModifyItem.module.css';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect, ChangeEvent } from 'react';
 import Image from 'next/image';
 import { Link } from 'react-router-dom';
 import LogoutBanner from './LogoutBanner';
 import Header from './Header';
 import CircleIcon from './CircleIcon';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+
+interface ModifyItemProps {
+    restaurantName: keyof typeof restaurantData;
+  }
 
 interface Review {
     _id: string;
@@ -74,14 +80,13 @@ const restaurantData = {
     // Add other restaurants as needed
   };
 
-export default function ModifyItem() {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const params = useParams();
-    const id = params?.id as string;
-    const { restaurantName } = location.state || {};
+export default function ModifyItem ( {restaurantName} : ModifyItemProps) {
+    
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const id = searchParams.get('id');    
     const restaurant = restaurantData[restaurantName];
-    const [reviewItem, setReviewItem] = useState<Review>({ _id: id, restaurant: '', rating: '', review: ''});
+    //const [reviewItem, setReviewItem] = useState<Review>({ _id: id, restaurant: '', rating: '', review: ''});
     const [rating, setRating] = useState('');
     const [review, setReview] = useState('');
     const [selectedRadio, setSelectedRadio] = useState('');
@@ -90,7 +95,7 @@ export default function ModifyItem() {
     useEffect( () => {
         const fetchReview = async () => {
             try {
-                const response = await fetch(`/api/modify-item/${id}`);
+                const response = await fetch(`/api/modify-review/${id}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -125,13 +130,13 @@ export default function ModifyItem() {
         e.preventDefault();
 
         try {
-            const response = await fetch(`/api/modify-item/${id}`, {
+            const response = await fetch(`/api/modify-review/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            navigate('/reviews', { state: { restaurantName: restaurantName } });
+            router.push(`/reviews?name=${encodeURIComponent(restaurantName)}`);
         } catch (error) {
             console.error('Error in ModifyItem');
         }
@@ -150,7 +155,7 @@ export default function ModifyItem() {
             };
 
             try {
-                const response = await fetch(`/api/modify-item/${id}`, {
+                const response = await fetch(`/api/modify-review/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -166,7 +171,7 @@ export default function ModifyItem() {
                 setSelectedRadio(''); // reset selected radio
                 setReview(''); // reset textbox
 
-                navigate('/reviews', { state: { restaurantName: restaurantName } });
+                router.push(`/reviews?name=${encodeURIComponent(restaurantName)}`);
             } catch (error) {
                 console.error('Error in ModifyItem!', error);
             }
@@ -183,7 +188,7 @@ export default function ModifyItem() {
             {isLoggedIn ? <LogoutBanner /> : <Header />}
             <h1 className={styles.name}>{restaurantName}</h1>
             <div className={styles.reviewComponents}>
-                <Image src={restaurant.image} alt={restaurant.name || 'Restaurant image'} 
+                <Image src={restaurant.image} alt={restaurantName || 'Restaurant image'} 
                     width={250} height={250} className={styles.image}/>
 
                 <form className={styles.formContainer}>

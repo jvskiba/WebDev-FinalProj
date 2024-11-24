@@ -61,7 +61,7 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                     review => <li key={review._id} className={styles.review}>
                         <p>Rating: {review.rating}</p>
                         <p>Review: {review.review}</p>
-                        <button onClick={() => {router.push(`/modify-item/${review._id}?name=${encodeURIComponent(restaurantName)}`)}}>Modify Review</button>
+                        <button onClick={() => {router.push(`/modify-review/${review._id}?name=${encodeURIComponent(restaurantName)}&id=${encodeURIComponent(review._id)}`)}}>Modify Review</button>
                         </li>
                 )}
             </ul> : <></>}

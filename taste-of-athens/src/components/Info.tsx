@@ -97,6 +97,10 @@ const Info: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
     router.push(`/menu?name=${encodeURIComponent(name)}`);
   };
 
+  const handleReservation = (name: string) => {
+    router.push(`/reservation?name=${encodeURIComponent(name)}`);
+  };
+
   if (!restaurant) {
     return <p>Restaurant not found.</p>;
   }
@@ -129,8 +133,8 @@ const Info: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
       </div>
 
       <div className={styles.buttons}>
-      <button className={styles.button} onClick={() => handleMenu(restaurantName)}>Memu</button>
-        <button className={styles.button} onClick={handleBtnClick}>Reservations</button>
+        <button className={styles.button} onClick={() => handleMenu(restaurantName)}>Memu</button>
+        <button className={styles.button} onClick={() => handleReservation(restaurantName)}>Reservation</button>
         <button className={styles.button} onClick={() => handleLeaveReview(restaurantName)}>Write Review</button>
         <button className={styles.button} onClick={() => handleViewReviews(restaurantName)}>Reviews & Ratings</button>
       </div>

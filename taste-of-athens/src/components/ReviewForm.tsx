@@ -170,7 +170,7 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                 <form className={styles.formContainer}>
                     {/* Rating Buttons */}
                     <div className={styles.ratingContainer}>
-                        <h3>How would you rate your experience?</h3>
+                        <h3>Your Rating</h3>
                         <div className={styles.ratingButtonsForm}>
                         <p className={styles.radioLabel}>Excellent</p>
                             <label className={styles.radioContainer}>
@@ -226,7 +226,7 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
 
                     {/* Textbox */}
                     <div className={styles.reviewContainer}>
-                        <h3>What feedback do you have?</h3>
+                        <h3>Write Feedback</h3>
                         <textarea value={review} placeholder={'Leave a review'} cols={40} rows ={8}
                             onChange={updateReview} className={styles.textbox}/>
                     </div>
@@ -234,7 +234,7 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                     {/* Image Upload */}
                     <div className={styles.imageUpload}>
                         <label htmlFor="image" className={styles.imageLabel}>
-                            Upload an Image (Optional)
+                            Upload Image
                         </label>
                         <input 
                             type="file" 

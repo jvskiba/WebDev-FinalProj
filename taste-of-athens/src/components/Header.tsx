@@ -25,10 +25,6 @@ const Header = () => {
         return styles.light;
       case '/register':
         return styles.light;
-      case '/resturants':
-        return styles.light;
-      case '/details':
-        return styles.light;
       default:
         return styles.dark;
     }

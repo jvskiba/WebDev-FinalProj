@@ -23,7 +23,7 @@ body {
     height: 200px;
     box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
     background-color: #FFFFFF;
-   /* border: 1px #a00606 solid; */
+  
     padding: 20px;
     margin: 15px;
     cursor: pointer;
@@ -38,7 +38,6 @@ body {
 .userReview {
     font-size: bold;
     color: grey;
-
     text-align: center;
 }
 .review:hover {
@@ -67,5 +66,33 @@ body {
   .modifyReviewButton:hover {
     background-color: #e58c8c;
   }
+  
 
+
+
+.ratingContainer {
+  display: flex;
+  align-items: center;  
+  gap: 10px;  /* Add space between the icons and the label */
+}
+
+
+.radioIcons {
+  display: flex;
+  justify-content: flex-start;
+  border: 1px #b3b3b3 solid;
+  border-radius: 20px;
+  padding: 2.5px;
+}
+
+
+.ratingIcon {
+  margin-right: 5px; /* add space to each rating icon*/
+}
+
+.ratingLabel {
+  font-size: 1.2em;  
+  font-weight: bold;
+  color: #333;  
+}
 

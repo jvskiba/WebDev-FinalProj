@@ -141,10 +141,10 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                     throw new Error('Network response was not ok');
                 }
 
-                setRating('0'); // reset rating value
-                setSelectedRadio(''); // reset selected radio
-                setReview(''); // reset textbox
-                setImage(null); // Clear selected image
+                setRating('0'); 
+                setSelectedRadio(''); 
+                setReview(''); 
+                setImage(null); 
                 setImagePreview(null); // Clear image preview
 
                 router.push(`/reviews?name=${encodeURIComponent(restaurantName)}`);

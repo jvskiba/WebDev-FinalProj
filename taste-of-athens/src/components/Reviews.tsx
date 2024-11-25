@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import { useRouter } from 'next/navigation';
+import CircleIcon from './CircleIcon';
 
 interface ReviewsProps {}
 
@@ -47,9 +48,42 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
         setIsLoaded(true);
     }, []);
 
+    const renderRating = (rating: string) => {
+        // Rating to label mapping
+        const ratingLabels: { [key: number]: string } = {
+          1: 'Terrible',
+          2: 'Poor',
+          3: 'Average',
+          4: 'Very Good',
+          5: 'Excellent',
+        };
+      
+        const ratingNumber = parseInt(rating);
+      
+      
+        const radioIcon = ['1', '2', '3', '4', '5'].map((value) => (
+          <div key={value} className={styles.ratingIcon}>
+            <CircleIcon
+              color={ratingNumber >= parseInt(value) ? 'green' : 'white'}
+              size="1em"
+            />
+          </div>
+        ));
+      
+        return (
+          <div className={styles.ratingContainer}>
+           
+            <div className={styles.ratingLabel}>{ratingLabels[ratingNumber]}</div>
+            <div className={styles.radioIcons}>{radioIcon}</div>
+          </div>
+        );
+      };
+
     const handleDelete = () => {
         router.push('/');
     }
+
+
 
     return (
         <div>
@@ -62,6 +96,8 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                 {reviews.map( 
                     review => <li key={review._id} className={styles.review}>
                         <p className={styles.userReview}>Rating: {review.rating}</p>
+                        <p className={styles.userReview}>{renderRating(review.rating)}</p>
+                       
                         <p className={styles.userReview}>Review: {review.review}</p>
                       
 

@@ -96,7 +96,7 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                 {reviews.map( 
                     review => <li key={review._id} className={styles.review}>
                         <p className={styles.userReview}>Rating: {review.rating}</p>
-                        <p className={styles.userReview}>{renderRating(review.rating)}</p>
+                        <div className={styles.userReview}>{renderRating(review.rating)}</div>
                        
                         <p className={styles.userReview}>Review: {review.review}</p>
                       

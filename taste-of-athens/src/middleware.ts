@@ -12,7 +12,7 @@ export async function middleware(request: any) {
     
     const reqUrl = new URL(request.url);
     if (!isAuthenticated && reqUrl.pathname !=="/"){ 
-        return NextResponse.redirect(new URL("/", request.url));
+        return NextResponse.redirect(new URL("/signin", request.url));
     }
     return NextResponse.next();
 }

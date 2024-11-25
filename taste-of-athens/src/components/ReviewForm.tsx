@@ -159,7 +159,7 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
 
     return (
         <div className={styles.pageContainer}>
-            {isLoggedIn ? <LogoutBanner /> : <Header />}
+            <Header />
 
             <h1 className={styles.name}>{restaurantName}</h1>
 

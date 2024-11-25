@@ -25,6 +25,8 @@ const Header = () => {
         return styles.light;
       case '/register':
         return styles.light;
+      case '/comingSoon':
+          return styles.light;
       default:
         return styles.dark;
     }

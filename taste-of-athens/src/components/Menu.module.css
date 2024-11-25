@@ -1,0 +1,47 @@
+.container {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .menuItems {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .menuItem {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .itemName {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .itemPrice {
+    color: #888;
+  }
+  
+  .itemDescription {
+    margin-top: 5px;
+  }
+  
+  .backButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .backButton:hover {
+    background-color: #0056b3;
+  }

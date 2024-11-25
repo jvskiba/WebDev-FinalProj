@@ -185,7 +185,7 @@ export default function ModifyItem ( {restaurantName} : ModifyItemProps) {
 
     return (
         <div className={styles.pageContainer}>
-            {isLoggedIn ? <LogoutBanner /> : <Header />}
+         <Header />
             <h1 className={styles.name}>{restaurantName}</h1>
             <div className={styles.reviewComponents}>
                 <Image src={restaurant.image} alt={restaurantName || 'Restaurant image'} 

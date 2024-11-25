@@ -129,8 +129,9 @@ body {
 .formButtons {
     display: inline-flex;
     flex-direction: row;
-    justify-content: space-between;
+  
 
     grid-column: 2;
     grid-row: 2;
+    gap: 10px;
 }

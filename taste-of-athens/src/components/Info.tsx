@@ -133,7 +133,7 @@ const Info: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
       </div>
 
       <div className={styles.buttons}>
-        <button className={styles.button} onClick={() => handleMenu(restaurantName)}>Memu</button>
+        <button className={styles.button} onClick={() => handleMenu(restaurantName)}>Menu</button>
         <button className={styles.button} onClick={() => handleReservation(restaurantName)}>Reservation</button>
         <button className={styles.button} onClick={() => handleLeaveReview(restaurantName)}>Write Review</button>
         <button className={styles.button} onClick={() => handleViewReviews(restaurantName)}>Reviews & Ratings</button>

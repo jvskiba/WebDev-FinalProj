@@ -38,6 +38,8 @@ const Reservation: React.FC<RestaurantReservationProps> = ({ restaurantName }) =
   const [numberOfPeople, setNumberOfPeople] = useState('');
   const [contactInfo, setContactInfo] = useState('');
   const [contactType, setContactType] = useState<'phone' | 'email'>('phone');
+  const [confirmationMessage, setConfirmationMessage] = useState<string | null>(null);
+
   const restaurantInfo = restaurantData[restaurantName];
 
   if (!restaurantInfo) {
@@ -50,18 +52,12 @@ const Reservation: React.FC<RestaurantReservationProps> = ({ restaurantName }) =
       return;
     }
 
-    // Logic for sending message
-    if (contactType === 'phone') {
-      alert(
-        `Reservation confirmed for ${numberOfPeople} people at ${reservationTime} at ${restaurantName}. SMS will be sent to ${contactInfo}.`
-      );
-    } else {
-      alert(
-        `Reservation confirmed for ${numberOfPeople} people at ${reservationTime} at ${restaurantName}. An email will be sent to ${contactInfo}.`
-      );
-    }
+    const message =
+      contactType === 'phone'
+        ? `Reservation confirmed for ${numberOfPeople} people at ${reservationTime} at ${restaurantName}. SMS will be sent to ${contactInfo}.`
+        : `Reservation confirmed for ${numberOfPeople} people at ${reservationTime} at ${restaurantName}. An email will be sent to ${contactInfo}.`;
 
-    // TODO: Add backend API call to send SMS or email
+    setConfirmationMessage(message);
   };
 
   return (
@@ -121,6 +117,13 @@ const Reservation: React.FC<RestaurantReservationProps> = ({ restaurantName }) =
           Confirm Reservation
         </button>
       </form>
+
+      {/* Confirmation message */}
+      {confirmationMessage && (
+        <div className={styles.confirmationMessage}>
+          <p>{confirmationMessage}</p>
+        </div>
+      )}
     </div>
   );
 };

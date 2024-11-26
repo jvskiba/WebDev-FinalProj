@@ -1,12 +1,9 @@
-body {
+.pageContainer {
     color: #171717; 
     --foreground: #171717;
     background: #FFFFFF;
     margin: 10 10;
     justify-items: center;
-}
-
-.pageContainer {
     display: grid;
     grid-template-columns: 3fr;
     gap: 30px;

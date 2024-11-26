@@ -36,6 +36,8 @@ const restaurantData: { [key: string]: RestaurantInfo } = {
 const Reservation: React.FC<RestaurantReservationProps> = ({ restaurantName }) => {
   const [reservationTime, setReservationTime] = useState('');
   const [numberOfPeople, setNumberOfPeople] = useState('');
+  const [contactInfo, setContactInfo] = useState('');
+  const [contactType, setContactType] = useState<'phone' | 'email'>('phone');
   const restaurantInfo = restaurantData[restaurantName];
 
   if (!restaurantInfo) {
@@ -43,11 +45,23 @@ const Reservation: React.FC<RestaurantReservationProps> = ({ restaurantName }) =
   }
 
   const handleReservationSubmit = () => {
-    if (!reservationTime || !numberOfPeople) {
+    if (!reservationTime || !numberOfPeople || !contactInfo) {
       alert('Please fill out all fields before submitting.');
       return;
     }
-    alert(`Reservation confirmed for ${numberOfPeople} people at ${reservationTime} at ${restaurantName}.`);
+
+    // Logic for sending message
+    if (contactType === 'phone') {
+      alert(
+        `Reservation confirmed for ${numberOfPeople} people at ${reservationTime} at ${restaurantName}. SMS will be sent to ${contactInfo}.`
+      );
+    } else {
+      alert(
+        `Reservation confirmed for ${numberOfPeople} people at ${reservationTime} at ${restaurantName}. An email will be sent to ${contactInfo}.`
+      );
+    }
+
+    // TODO: Add backend API call to send SMS or email
   };
 
   return (
@@ -73,6 +87,28 @@ const Reservation: React.FC<RestaurantReservationProps> = ({ restaurantName }) =
             min="1"
             value={numberOfPeople}
             onChange={(e) => setNumberOfPeople(e.target.value)}
+            className={styles.input}
+          />
+        </label>
+
+        <label className={styles.label}>
+          Contact Type:
+          <select
+            value={contactType}
+            onChange={(e) => setContactType(e.target.value as 'phone' | 'email')}
+            className={styles.input}
+          >
+            <option value="phone">Phone (SMS)</option>
+            <option value="email">Email</option>
+          </select>
+        </label>
+
+        <label className={styles.label}>
+          Enter Your {contactType === 'phone' ? 'Phone Number' : 'Email'}:
+          <input
+            type={contactType === 'phone' ? 'tel' : 'email'}
+            value={contactInfo}
+            onChange={(e) => setContactInfo(e.target.value)}
             className={styles.input}
           />
         </label>

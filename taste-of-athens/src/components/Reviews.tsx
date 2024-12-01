@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import CircleIcon from './CircleIcon';
 
 interface ReviewsProps {}
@@ -83,7 +84,7 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
         router.push('/');
     }
 
-
+    const { data: session } = useSession();
 
     return (
         <div>
@@ -102,7 +103,7 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                         <p className={styles.userReview}>Review: {review.review}</p>
                       
 
-                        <button className={styles.modifyReviewButton} onClick={() => {router.push(`/modify-review/${review._id}?name=${encodeURIComponent(restaurantName)}&id=${encodeURIComponent(review._id)}`)}}>Modify Review</button>
+                        {session ? <button className={styles.modifyReviewButton} onClick={() => {router.push(`/modify-review/${review._id}?name=${encodeURIComponent(restaurantName)}&id=${encodeURIComponent(review._id)}`)}}>Modify Review</button> : ""}
                         </li>
                 )}
             </ul> : <></>}

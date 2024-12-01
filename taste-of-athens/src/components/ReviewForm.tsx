@@ -85,8 +85,6 @@ const restaurantData = {
     // Add other restaurants as needed
   };
 
-const isLoggedIn = true;
-
 const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
     const router = useRouter();
 
@@ -237,7 +235,7 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                             Upload Image
                         </label>
                         <input 
-                            type="file" 
+                            type="" 
                             id="image" 
                             onChange={handleImageChange} 
                             accept="image/*"
@@ -253,8 +251,7 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                     </div>
 
                     {/* Submit Button*/}
-                    {isLoggedIn ? <button onClick={handleSubmit} className={styles.submitButton}>Submit</button> 
-                        : <Link to='/signin' className={styles.signinPrompt}>Sign in</Link>}
+                    <button onClick={handleSubmit} className={styles.submitButton}>Submit</button>
                 </form>
             </div>
         </div>

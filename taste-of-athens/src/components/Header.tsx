@@ -51,7 +51,7 @@ const Header = () => {
           {!session ? <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signin')}>Sign In</button>
             : <button className={`${styles.button} ${btnClass}`} onClick={doLogout}>Logout</button>}
           {!session ? <button className={`${styles.button} ${btnClass}`} onClick={() => handleLinkPress('/signup')}>Sign Up</button>
-            : <button className={`${styles.button} ${btnClass} ${styles.greeting}`}>Welcome, {session.user.name}</button>}
+            : <button className={`${styles.button} ${btnClass} ${styles.greeting}`}>Welcome, {session.user ? session.user.name : "User"}</button>}
           <div className={styles.searchContainer}>
             <input 
               type="text" 

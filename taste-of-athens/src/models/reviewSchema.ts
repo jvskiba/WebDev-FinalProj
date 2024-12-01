@@ -4,6 +4,7 @@ interface Review extends Document {
     restaurant: string;
     rating: string;
     review: string;
+    image?: string;
 }
 
 const reviewSchema = new Schema<Review>({
@@ -18,6 +19,10 @@ const reviewSchema = new Schema<Review>({
     review: {
         type: String,
         required: true,
+    },
+    image: {
+        type: String,
+        required: false,
     },
 }, { collection : 'Reviews' });
 

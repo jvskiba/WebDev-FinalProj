@@ -4,15 +4,13 @@ import CircleIcon from './CircleIcon';
 import { useState, ChangeEvent } from 'react';
 import Header from './Header';
 import Image from 'next/image';
-import { Link } from 'react-router-dom';
-import LogoutBanner from './LogoutBanner';
 import { useRouter } from 'next/navigation';
 
 interface Review {
     id: number;
     rating: string;
     review: string;
-    imageUrl: string;
+    image?: String;
 }
 
 interface RestaurantInfoProps {
@@ -93,8 +91,7 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
     const [rating, setRating] = useState('0');
     const [review, setReview] = useState('');
     const [selectedRadio, setSelectedRadio] = useState('');
-    const [image, setImage] = useState<File | null>(null); // state to store selected image
-    const [imagePreview, setImagePreview] = useState<string | null>(null); // state to store image preview URL
+    const [imageURL, setImageURL] = useState<string>(""); // state to store img url
 
     const updateReview = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setReview(e.target.value);
@@ -104,13 +101,9 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
         setRating(n);
         setSelectedRadio(n);
     }
-    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]; // Get the first file
-        if (file) {
-            setImage(file);
-            setImagePreview(URL.createObjectURL(file)); // Set image preview URL
-        }
-    };
+    const updateImageURL = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setImageURL(e.target.value);
+    }
 
     const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -122,7 +115,7 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                 restaurant: restaurantName,
                 rating: rating,
                 review: review,
-                imageUrl: imagePreview, // Save the image preview URL (or upload the image to the backend
+                image: imageURL, // upload the image link to database
             };
 
             try {
@@ -142,8 +135,7 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                 setRating('0'); 
                 setSelectedRadio(''); 
                 setReview(''); 
-                setImage(null); 
-                setImagePreview(null); // Clear image preview
+                setImageURL("");
 
                 router.push(`/reviews?name=${encodeURIComponent(restaurantName)}`);
             } catch (error) {
@@ -234,18 +226,13 @@ const ReviewForm: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                         <label htmlFor="image" className={styles.imageLabel}>
                             Upload Image
                         </label>
-                        <input 
-                            type="" 
-                            id="image" 
-                            onChange={handleImageChange} 
-                            accept="image/*"
-                            className={styles.imageInput} 
-                        />
+                        <textarea value={imageURL} placeholder={'Image URL'} cols={40} rows ={1}
+                            onChange={updateImageURL} className={styles.textbox}/>
 
                         {/* Display Image Preview */}
-                        {imagePreview && (
+                        {imageURL && (
                             <div className={styles.imagePreviewContainer}>
-                                <img src={imagePreview} alt="Preview" className={styles.imagePreview} />
+                                <img src={imageURL} alt="Preview" className={styles.imagePreview} />
                             </div>
                         )}
                     </div>

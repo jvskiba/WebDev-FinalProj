@@ -14,7 +14,7 @@ interface Review {
     restaurant: string;
     rating: string;
     review: string;
-    imageUrl: string;
+    image: string;
 }
 
 interface RestaurantInfoProps {
@@ -100,7 +100,7 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                         <div className={styles.userReview}>{renderRating(review.rating)}</div>
                        
                         <p className={styles.userReview}>Review: {review.review}</p>
-                        {review.imageUrl ? <img src={review.imageUrl} alt="review image" /> : ""}
+                        {review.image ? <img src={review.image} alt="review image" className={styles.image}/> : ""}
 
                         {session ? <button className={styles.modifyReviewButton} onClick={() => {router.push(`/modify-review/${review._id}?name=${encodeURIComponent(restaurantName)}&id=${encodeURIComponent(review._id)}`)}}>Modify Review</button> : ""}
                         </li>

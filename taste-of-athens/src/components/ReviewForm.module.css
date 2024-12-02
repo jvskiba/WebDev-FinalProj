@@ -207,8 +207,8 @@
 }
 
 .imagePreview {
-    max-width: 100px;
-    border-radius: 10px;
+    max-width: 200px;
+    border-radius: 10;
     margin-top: 10px;
 }
 

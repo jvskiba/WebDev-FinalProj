@@ -19,6 +19,7 @@ interface Review {
     restaurant: string;
     rating: string;
     review: string;
+    image?: string;
 }
 
 const restaurantData = {
@@ -91,6 +92,7 @@ export default function ModifyItem ( {restaurantName} : ModifyItemProps) {
     const [review, setReview] = useState('');
     const [selectedRadio, setSelectedRadio] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
+    const [imageURL, setImageURL] = useState<string>(""); // state to store img url
 
     useEffect( () => {
         const fetchReview = async () => {
@@ -100,12 +102,13 @@ export default function ModifyItem ( {restaurantName} : ModifyItemProps) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log('DATA::::');
-                console.log(data.review);
+                //console.log('DATA::::');
+                //console.log(data.review);
                 
                 await setRating(data.review.rating);
                 await setReview(data.review.review);
                 await setSelectedRadio(data.review.rating);
+                await setImageURL(data.review.image);
             } catch (error) {
                 console.log('Error from ModifyItem');
             }
@@ -119,6 +122,10 @@ export default function ModifyItem ( {restaurantName} : ModifyItemProps) {
     
     const updateReview = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setReview(e.target.value);
+    }
+
+    const updateImageURL = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setImageURL(e.target.value);
     }
 
     const handleRadioButton = (n: string) => {
@@ -152,6 +159,7 @@ export default function ModifyItem ( {restaurantName} : ModifyItemProps) {
                 restaurant: restaurantName,
                 rating: rating,
                 review: review,
+                image: imageURL,
             };
 
             try {
@@ -253,6 +261,22 @@ export default function ModifyItem ( {restaurantName} : ModifyItemProps) {
                         <h3>What feedback do you have?</h3>
                         <textarea value={review} placeholder={'Leave a review'} cols={40} rows ={8}
                             onChange={updateReview} className={styles.textbox}/>
+                    </div>
+
+                    {/* Image Upload */}
+                    <div className={styles.imageUpload}>
+                        <label htmlFor="image" className={styles.imageLabel}>
+                            Upload Image
+                        </label>
+                        <textarea value={imageURL} placeholder={'Image URL'} cols={40} rows ={1}
+                            onChange={updateImageURL} className={styles.textbox}/>
+
+                        {/* Display Image Preview */}
+                        {imageURL && (
+                            <div className={styles.imagePreviewContainer}>
+                                <img src={imageURL} alt="Preview" className={styles.imagePreview} />
+                            </div>
+                        )}
                     </div>
 
                     {/* Submit Button*/}

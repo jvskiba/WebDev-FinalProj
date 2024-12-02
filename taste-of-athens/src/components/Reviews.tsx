@@ -35,7 +35,7 @@ const Reviews: React.FC<RestaurantInfoProps> = ({ restaurantName }) => {
                 }
 
                 const data = await response.json();
-                 console.log(data);  // Check the structure of the data
+                 //console.log(data);  // Check the structure of the data
 
                 setReviews(data.reviews.filter(
                     (review: Review)  => review.restaurant === restaurantName

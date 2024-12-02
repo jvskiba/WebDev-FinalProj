@@ -1,23 +1,15 @@
-body {
+.pageContainer {
     color: #171717; 
     --foreground: #171717;
     background: #FFFFFF;
     margin: 10 10;
-}
-
-.pageContainer {
+    justify-items: center;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.4fr 0.4fr 1fr 0.6fr;
-    align-items: center;
-    padding: 10px;
-}
-
-.name {
-    grid-row: 2;
-    font-size: 2em;
-    font-weight: bold;
-    justify-self: center;
+    grid-template-columns: 3fr;
+    gap: 30px;
+    padding: 30px;
+    align-items: start;
+    font-family: Arial, sans-serif;
 }
 
 .reviewComponents {
@@ -27,8 +19,13 @@ body {
 }
 
 .image {
-    grid-row: 3;
-    grid-column: 1;
+    justify-items: fixed;
+    position: fixed;
+    z-index: 1000;
+    border-radius: 10px;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
 }
 
 .ratingsDisplay {
@@ -48,23 +45,21 @@ body {
 }
 
 .ratingContainer {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-
-    margin: 0 auto;
-    padding: 0px 20px 15px 20px;
-
-    grid-column: 1;
-    grid-row: 1;
+    gap: 15px;
+    align-items: flex-start;
+    margin-right: 20px;
 }
 
 .reviewContainer {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
-    grid-column: 3;
-    grid-row: 1;
-    align-items: center;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 20px;
+
 }
 
 .submitButton {
@@ -73,6 +68,8 @@ body {
     border-radius: 5px;
     width: 50%;
     align-self: center;
+    grid-column: 2;
+    grid-row: 2;
 }
 
 .ratingButtonsForm {
@@ -93,7 +90,6 @@ body {
 .radioIcon {
     display: inline-flex;
     flex-direction: row;
-
     border: 1px #b3b3b3 solid;
     border-radius: 20px;
     padding: 2.5px;
@@ -103,16 +99,62 @@ body {
     border-color: #171717;
 }
 
+.name {
+    grid-column: span 2;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ratingContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+
+.ratingButtonsForm {
+    display: inline-grid;
+    grid-template-columns: 45% 55%;
+    column-gap: 1rem;
+    align-items: center;
+    row-gap: 5px;
+}
+
 .radioContainer input[type='radio']:checked+div {
     border-color: #171717;
 }
 
+.feedbackContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.reviewContainer h3 {
+    font-weight: bold;
+}
+
+.ratingContainer h3 {
+    font-weight: bold;
+}
+
 .textbox {
     background-color: #c3c3c3;
-    border: 1px #939393 solid;
-    border-radius: 20px;
+    border: 1px solid #939393;
+    border-radius: 10px;
     resize: none;
-    padding: 5px;
+    padding: 10px;
+    font-size: 14px;
+    width: 120%;
+    height: 160px;
+    margin-top: 10px;
+    margin-right: 10px;
+
 }
 
 .signinPrompt {
@@ -126,12 +168,46 @@ body {
     text-align: center;
 }
 
-.formButtons {
-    display: inline-flex;
-    flex-direction: row;
-  
+.imageUpload {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin-top: 0px;
+    margin-right: 0;
+    margin-left: 100;
+}
 
-    grid-column: 2;
-    grid-row: 2;
-    gap: 10px;
+.imageLabel {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.imageInput {
+    background-color: #f5f5f5;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    width: 100%;
+}
+
+.imageInput:hover {
+    border-color: #888;
+    background-color: #eaeaea;
+}
+
+.imageInput:focus {
+    outline: none;
+    border-color: #a66366;
+    box-shadow: 0 0 5px rgba(198, 127, 128, 0.5);
+}
+
+.imagePreview {
+    max-width: 100px;
+    border-radius: 10px;
+    margin-top: 10px;
 }
